@@ -89,6 +89,7 @@
 - `results/monthly_forecast.csv`
 - `results/annual_forecast.csv`
 - `reports/forecast_run_2026-10-06.md`
+- `reports/model_validation_2026-10-06.md`
 
 ## 執行
 
