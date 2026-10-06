@@ -94,9 +94,44 @@ pytest -q
 .\.venv\Scripts\python.exe src/pipeline.py
 ```
 
-## 輸出
+## 已提交的資料與模型結果
 
-`pipeline.py` 會產生：
+### 作業用歷史資料
+
+`data/processed/TUC_6274_assignment_historical_2016_2025.csv` 是給人直接閱讀、做 Table 3.1 / 3.2 的整理版，包含：
+
+- 2016–2025 Income Statement / Balance Sheet 主要科目
+- Sales Growth、COGS/Sales、Gross Margin、OpEx/Sales
+- Days Sales in Cash、A/R Days、Inventory Turnover、A/P Days
+- Effective Tax Rate、Dividend Payout
+
+作業建議以 **2021–2025** 當核心 historical window，2016–2020 用於長期趨勢與穩健性檢查。
+
+### 已完成 forecast run
+
+目前 repo 保存本次已跑完的輸出：
+
+- `results/walk_forward_backtest.csv`
+- `results/model_summary.csv`
+- `results/monthly_forecast.csv`
+- `results/annual_forecast.csv`
+- `reports/forecast_run_2026-10-06.md`
+
+本次 walk-forward backtest 中，**Damped Holt-Winters** 的 mean WAPE 最低（約 20.0%），優於 Ridge、Gradient Boosting、Random Forest 與 Seasonal Naive。
+
+Selected annual forecast：
+
+| Year | Revenue (NT$ bn) | YoY |
+|---|---:|---:|
+| 2026E | 61.71 | 103.4% |
+| 2027F | 104.65 | 69.6% |
+| 2028F | 144.41 | 38.0% |
+
+完整解讀與限制請看 `reports/forecast_run_2026-10-06.md`。
+
+### Pipeline 重新執行時的輸出
+
+`pipeline.py` 預計產生：
 
 - `data/processed/monthly_revenue.csv`
 - `data/processed/ml_features.csv`
