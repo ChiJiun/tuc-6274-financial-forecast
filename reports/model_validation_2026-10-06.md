@@ -122,6 +122,8 @@ Units: NT$bn.
 
 The trend-based exponential-smoothing variants are relatively close for 2027 (roughly NT$105–109bn) but spread widely by 2028 (roughly NT$144–177bn). Therefore the 2027 level is materially more robust than the 2028 level.
 
+An equal-weight ensemble of the three trend-based ETS specifications produced 12-month quarterly rolling mean WAPE of 17.88%, which did not beat the best single additive-seasonality specification at 17.76%. Its full-sample forecast was NT$107.70bn for 2027 and NT$157.95bn for 2028, so ensembling does not materially change the 2027 conclusion and still leaves substantial 2028 uncertainty.
+
 Cross-family model dispersion is even larger:
 
 | Model | 2027 | 2028 |
