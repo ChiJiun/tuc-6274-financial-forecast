@@ -97,6 +97,7 @@ Windows PowerShell：
 
 ```powershell
 ./run.ps1
+./run.ps1 -AsOf 2026-09 -ForecastEnd 2028-12  # 重現指定資料截止日
 ```
 
 或：
@@ -107,7 +108,7 @@ python -m venv .venv
 pip install -r requirements.txt
 
 python src/fetch_raw.py
-python src/pipeline.py
+python src/pipeline.py --forecast-end 2028-12
 pytest -q
 ```
 

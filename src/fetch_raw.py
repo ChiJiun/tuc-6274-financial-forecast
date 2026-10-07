@@ -4,7 +4,7 @@ import argparse
 import csv
 import hashlib
 import re
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
 from urllib.parse import parse_qs, unquote, urljoin, urlparse
 
@@ -65,14 +65,36 @@ def iter_months(start_year: int, start_month: int, end_year: int, end_month: int
             year += 1
 
 
+def previous_month(year: int, month: int) -> tuple[int, int]:
+    if month == 1:
+        return year - 1, 12
+    return year, month - 1
+
+
+def default_as_of(today: date | None = None) -> tuple[int, int]:
+    """Return the latest normally complete monthly-revenue period."""
+    today = today or date.today()
+    return previous_month(today.year, today.month)
+
+
+def parse_as_of(value: str) -> tuple[int, int]:
+    try:
+        parsed = datetime.strptime(value, "%Y-%m")
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError("--as-of must be YYYY-MM") from exc
+    return parsed.year, parsed.month
+
+
 def fetch_mops_monthly(
     start_year: int = 2003,
     start_month: int = 12,
-    end_year: int = 2026,
-    end_month: int = 9,
+    end_year: int | None = None,
+    end_month: int | None = None,
     refresh: bool = False,
 ):
     """Download MOPS OTC historical monthly revenue HTML."""
+    if end_year is None or end_month is None:
+        end_year, end_month = default_as_of()
     for year, month in iter_months(start_year, start_month, end_year, end_month):
         roc = year - 1911
         url = (
@@ -100,8 +122,8 @@ def safe_filename_from_tuc_link(url: str) -> str:
 
 def fetch_tuc_ir_attachments(refresh: bool = False):
     ir_html = RAW / "tuc_investor_relations.html"
-    if not ir_html.exists():
-        download(CORE_SNAPSHOTS["tuc_investor_relations.html"], ir_html, refresh=True)
+    # Refresh the listing so newly published IR documents can be discovered.
+    download(CORE_SNAPSHOTS["tuc_investor_relations.html"], ir_html, refresh=True)
 
     text = ir_html.read_text(encoding="utf-8", errors="replace")
     soup = BeautifulSoup(text, "html.parser")
@@ -111,11 +133,8 @@ def fetch_tuc_ir_attachments(refresh: bool = False):
         if "_run.php" not in href:
             continue
         name = safe_filename_from_tuc_link(href)
-        if (
-            re.search(r"202[1-6]Q[1-4]", name, re.I)
-            or "財報2022-2025Q3" in name
-            or "合併財報" in name
-        ):
+        suffix = Path(name).suffix.lower()
+        if suffix in {".pdf", ".ppt", ".pptx", ".zip"}:
             wanted.append((href, name))
 
     seen = set()
@@ -194,8 +213,13 @@ def main():
     parser.add_argument("--refresh", action="store_true")
     parser.add_argument("--start-year", type=int, default=2003)
     parser.add_argument("--start-month", type=int, default=12)
-    parser.add_argument("--end-year", type=int, default=2026)
-    parser.add_argument("--end-month", type=int, default=9)
+    parser.add_argument(
+        "--as-of",
+        type=parse_as_of,
+        help="Freeze the monthly-revenue cutoff at YYYY-MM. Default: previous month.",
+    )
+    parser.add_argument("--end-year", type=int, help=argparse.SUPPRESS)
+    parser.add_argument("--end-month", type=int, help=argparse.SUPPRESS)
     parser.add_argument("--skip-ir", action="store_true")
     args = parser.parse_args()
 
@@ -203,12 +227,24 @@ def main():
     MOPS_MONTHLY.mkdir(parents=True, exist_ok=True)
     IR_DIR.mkdir(parents=True, exist_ok=True)
 
+    if args.as_of and (args.end_year is not None or args.end_month is not None):
+        parser.error("use either --as-of or legacy --end-year/--end-month, not both")
+    if (args.end_year is None) != (args.end_month is None):
+        parser.error("legacy --end-year and --end-month must be supplied together")
+
+    if args.as_of:
+        end_year, end_month = args.as_of
+    elif args.end_year is not None:
+        end_year, end_month = args.end_year, args.end_month
+    else:
+        end_year, end_month = default_as_of()
+
     fetch_core_snapshots(refresh=args.refresh)
     fetch_mops_monthly(
         start_year=args.start_year,
         start_month=args.start_month,
-        end_year=args.end_year,
-        end_month=args.end_month,
+        end_year=end_year,
+        end_month=end_month,
         refresh=args.refresh,
     )
     if not args.skip_ir:
