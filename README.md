@@ -67,29 +67,32 @@
 比較模型：
 
 - Seasonal Naive
-- Damped Holt-Winters
+- Holt-Winters / ETS variants
 - Ridge
 - Gradient Boosting
 - Random Forest
 
-驗證方式：expanding walk-forward validation。
+模型選擇使用固定 12 個月 horizon 的 quarterly rolling-origin validation，以 mean WAPE 最低者為 production model；partial-year 2026 僅作 stress test。
 
-目前最低 mean WAPE 的模型為 **Damped Holt-Winters**。
+目前選擇 **Holt-Winters（damped trend + additive seasonality）**。
 
 | Year | Revenue Forecast (NT$ bn) | YoY |
 |---|---:|---:|
-| 2026E | 61.71 | 103.4% |
-| 2027F | 104.65 | 69.6% |
-| 2028F | 144.41 | 38.0% |
+| 2026E | 62.59 | 106.3% |
+| 2027F | 109.36 | 74.7% |
+| 2028F | 152.25 | 39.2% |
 
 詳細結果：
 
 - `results/model_summary.csv`
+- `results/model_selection_12m_quarterly.csv`
 - `results/walk_forward_backtest.csv`
+- `results/partial_year_stress_test.csv`
 - `results/monthly_forecast.csv`
 - `results/annual_forecast.csv`
-- `reports/forecast_run_2026-10-06.md`
-- `reports/model_validation_2026-10-06.md`
+- `reports/model_selection_2026-10-07.md`
+- `reports/forecast_run_2026-10-06.md`（historical snapshot）
+- `reports/model_validation_2026-10-06.md`（historical snapshot）
 
 ## 執行
 
