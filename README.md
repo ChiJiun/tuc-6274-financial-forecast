@@ -16,11 +16,13 @@
 ├─ data/
 │  ├─ raw/                    # 原始下載資料
 │  │  ├─ mops_monthly/       # MOPS 歷史月營收
+│  │  ├─ mops_financials/    # MOPS 合併財報
 │  │  ├─ investor_presentations/
 │  │  └─ manifest.csv
 │  └─ processed/             # 清洗後資料
 ├─ src/
 │  ├─ fetch_raw.py
+│  ├─ build_assignment_financials.py
 │  └─ pipeline.py
 ├─ results/                  # Backtest 與 forecast 結果
 ├─ reports/                  # 結果說明
@@ -35,6 +37,7 @@
 主要來源：
 
 - MOPS 歷史月營收（OTC）
+- MOPS 官方合併財務報表
 - 台燿官方 Investor Relations
 - StockGo / MoneyDJ 交叉核對
 
@@ -43,6 +46,8 @@
 ## 作業用歷史資料
 
 `data/processed/TUC_6274_assignment_historical_2016_2025.csv`
+
+由 `src/build_assignment_financials.py` 從 `data/raw/mops_financials/` 的官方 MOPS 財報重建；來源欄位與檢核結果分別在 `TUC_6274_assignment_provenance.csv`、`TUC_6274_assignment_reconciliation.csv`。
 
 包含：
 
@@ -111,6 +116,7 @@ python -m venv .venv
 pip install -r requirements.txt
 
 python src/fetch_raw.py
+python src/build_assignment_financials.py
 python src/pipeline.py --forecast-end 2028-12
 pytest -q
 ```

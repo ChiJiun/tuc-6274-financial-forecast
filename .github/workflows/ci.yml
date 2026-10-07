@@ -15,6 +15,7 @@ jobs:
           python-version: "3.12"
           cache: "pip"
       - run: pip install -r requirements.txt
+      - run: python src/build_assignment_financials.py
       - run: python src/pipeline.py --forecast-end 2028-12
       - run: python src/validate_models.py
       - run: pytest -q

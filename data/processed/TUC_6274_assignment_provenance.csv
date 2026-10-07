@@ -1,0 +1,341 @@
+﻿year,field,value,unit,statement,accounting_code,accounting_title,source_period,source_file,source_url,derivation
+2016,cash_dividend_ntd_m,512.0,NTD_million,statement_of_changes_in_equity,B5,普通股現金股利 Cash dividends of ordinary share,2017-Q4,data/raw/mops_financials/6274_2017_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2017&SSEASON=4&REPORT_ID=C,reported cash dividend paid in following period
+2016,revenue_ntd_m,13422.547,NTD_million,income,,營業收入合計,2016-Q4,data/raw/mops_financials/6274_2016_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2016&SSEASON=4&REPORT_ID=C,reported
+2016,cogs_ntd_m,10733.473,NTD_million,income,,營業成本合計,2016-Q4,data/raw/mops_financials/6274_2016_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2016&SSEASON=4&REPORT_ID=C,reported
+2016,gross_profit_ntd_m,2689.074,NTD_million,income,,營業毛利（毛損）,2016-Q4,data/raw/mops_financials/6274_2016_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2016&SSEASON=4&REPORT_ID=C,reported
+2016,opex_ntd_m,1472.372,NTD_million,income,,營業費用合計,2016-Q4,data/raw/mops_financials/6274_2016_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2016&SSEASON=4&REPORT_ID=C,reported
+2016,operating_income_ntd_m,1216.702,NTD_million,income,,營業利益（損失）,2016-Q4,data/raw/mops_financials/6274_2016_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2016&SSEASON=4&REPORT_ID=C,reported
+2016,pbt_ntd_m,1169.484,NTD_million,income,,繼續營業單位稅前淨利（淨損）,2016-Q4,data/raw/mops_financials/6274_2016_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2016&SSEASON=4&REPORT_ID=C,reported
+2016,tax_ntd_m,260.073,NTD_million,income,,所得稅費用（利益）合計,2016-Q4,data/raw/mops_financials/6274_2016_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2016&SSEASON=4&REPORT_ID=C,reported
+2016,net_income_ntd_m,909.4110000000001,NTD_million,income,,本期淨利（淨損）,2016-Q4,data/raw/mops_financials/6274_2016_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2016&SSEASON=4&REPORT_ID=C,reported
+2016,eps_ntd,3.76,NTD,income,,基本每股盈餘合計,2016-Q4,data/raw/mops_financials/6274_2016_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2016&SSEASON=4&REPORT_ID=C,reported
+2016,cash_ntd_m,1157.512,NTD_million,balance,,現金及約當現金合計,2016-Q4,data/raw/mops_financials/6274_2016_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2016&SSEASON=4&REPORT_ID=C,reported
+2016,accounts_receivable_ntd_m,4301.058,NTD_million,balance,,應收帳款淨額,2016-Q4,data/raw/mops_financials/6274_2016_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2016&SSEASON=4&REPORT_ID=C,reported
+2016,inventory_ntd_m,1556.211,NTD_million,balance,,存貨合計,2016-Q4,data/raw/mops_financials/6274_2016_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2016&SSEASON=4&REPORT_ID=C,reported
+2016,current_assets_ntd_m,8057.213,NTD_million,balance,,流動資產合計,2016-Q4,data/raw/mops_financials/6274_2016_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2016&SSEASON=4&REPORT_ID=C,reported
+2016,ppe_ntd_m,2871.067,NTD_million,balance,,不動產、廠房及設備合計,2016-Q4,data/raw/mops_financials/6274_2016_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2016&SSEASON=4&REPORT_ID=C,reported
+2016,total_assets_ntd_m,11698.617,NTD_million,balance,,資產總計,2016-Q4,data/raw/mops_financials/6274_2016_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2016&SSEASON=4&REPORT_ID=C,reported
+2016,short_term_borrowings_ntd_m,294.616,NTD_million,balance,,短期借款合計,2016-Q4,data/raw/mops_financials/6274_2016_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2016&SSEASON=4&REPORT_ID=C,reported
+2016,accounts_payable_ntd_m,3226.247,NTD_million,balance,,應付帳款合計,2016-Q4,data/raw/mops_financials/6274_2016_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2016&SSEASON=4&REPORT_ID=C,reported
+2016,current_liabilities_ntd_m,4968.4800000000005,NTD_million,balance,,流動負債合計,2016-Q4,data/raw/mops_financials/6274_2016_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2016&SSEASON=4&REPORT_ID=C,reported
+2016,bonds_payable_ntd_m,0.0,NTD_million,balance,,,2016-Q4,data/raw/mops_financials/6274_2016_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2016&SSEASON=4&REPORT_ID=C,not_present_assumed_zero
+2016,long_term_borrowings_ntd_m,0.0,NTD_million,balance,,長期借款合計,2016-Q4,data/raw/mops_financials/6274_2016_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2016&SSEASON=4&REPORT_ID=C,reported
+2016,total_liabilities_ntd_m,5162.405,NTD_million,balance,,負債總計,2016-Q4,data/raw/mops_financials/6274_2016_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2016&SSEASON=4&REPORT_ID=C,reported
+2016,equity_ntd_m,6536.212,NTD_million,balance,,權益總計,2016-Q4,data/raw/mops_financials/6274_2016_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2016&SSEASON=4&REPORT_ID=C,reported
+2017,cash_dividend_ntd_m,786.0,NTD_million,statement_of_changes_in_equity,B5,普通股現金股利 Cash dividends of ordinary share,2018-Q4,data/raw/mops_financials/6274_2018_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2018&SSEASON=4&REPORT_ID=C,reported cash dividend paid in following period
+2017,revenue_ntd_m,16103.211000000001,NTD_million,income,,營業收入合計,2017-Q4,data/raw/mops_financials/6274_2017_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2017&SSEASON=4&REPORT_ID=C,reported
+2017,cogs_ntd_m,12765.502,NTD_million,income,,營業成本合計,2017-Q4,data/raw/mops_financials/6274_2017_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2017&SSEASON=4&REPORT_ID=C,reported
+2017,gross_profit_ntd_m,3337.7090000000003,NTD_million,income,,營業毛利（毛損）,2017-Q4,data/raw/mops_financials/6274_2017_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2017&SSEASON=4&REPORT_ID=C,reported
+2017,opex_ntd_m,1996.497,NTD_million,income,,營業費用合計,2017-Q4,data/raw/mops_financials/6274_2017_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2017&SSEASON=4&REPORT_ID=C,reported
+2017,operating_income_ntd_m,1341.212,NTD_million,income,,營業利益（損失）,2017-Q4,data/raw/mops_financials/6274_2017_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2017&SSEASON=4&REPORT_ID=C,reported
+2017,pbt_ntd_m,1322.098,NTD_million,income,,繼續營業單位稅前淨利（淨損）,2017-Q4,data/raw/mops_financials/6274_2017_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2017&SSEASON=4&REPORT_ID=C,reported
+2017,tax_ntd_m,320.583,NTD_million,income,,所得稅費用（利益）合計,2017-Q4,data/raw/mops_financials/6274_2017_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2017&SSEASON=4&REPORT_ID=C,reported
+2017,net_income_ntd_m,1001.515,NTD_million,income,,本期淨利（淨損）,2017-Q4,data/raw/mops_financials/6274_2017_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2017&SSEASON=4&REPORT_ID=C,reported
+2017,eps_ntd,4.12,NTD,income,,基本每股盈餘合計,2017-Q4,data/raw/mops_financials/6274_2017_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2017&SSEASON=4&REPORT_ID=C,reported
+2017,cash_ntd_m,1121.881,NTD_million,balance,,現金及約當現金總額,2017-Q4,data/raw/mops_financials/6274_2017_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2017&SSEASON=4&REPORT_ID=C,reported
+2017,accounts_receivable_ntd_m,5455.135,NTD_million,balance,,應收帳款淨額,2017-Q4,data/raw/mops_financials/6274_2017_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2017&SSEASON=4&REPORT_ID=C,reported
+2017,inventory_ntd_m,2061.03,NTD_million,balance,,存貨合計,2017-Q4,data/raw/mops_financials/6274_2017_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2017&SSEASON=4&REPORT_ID=C,reported
+2017,current_assets_ntd_m,9312.954,NTD_million,balance,,流動資產合計,2017-Q4,data/raw/mops_financials/6274_2017_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2017&SSEASON=4&REPORT_ID=C,reported
+2017,ppe_ntd_m,2676.129,NTD_million,balance,,不動產、廠房及設備合計,2017-Q4,data/raw/mops_financials/6274_2017_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2017&SSEASON=4&REPORT_ID=C,reported
+2017,total_assets_ntd_m,12549.045,NTD_million,balance,,資產總計,2017-Q4,data/raw/mops_financials/6274_2017_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2017&SSEASON=4&REPORT_ID=C,reported
+2017,short_term_borrowings_ntd_m,518.597,NTD_million,balance,,短期借款合計,2017-Q4,data/raw/mops_financials/6274_2017_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2017&SSEASON=4&REPORT_ID=C,reported
+2017,accounts_payable_ntd_m,3252.219,NTD_million,balance,,應付帳款合計,2017-Q4,data/raw/mops_financials/6274_2017_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2017&SSEASON=4&REPORT_ID=C,reported
+2017,current_liabilities_ntd_m,4713.777,NTD_million,balance,,流動負債合計,2017-Q4,data/raw/mops_financials/6274_2017_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2017&SSEASON=4&REPORT_ID=C,reported
+2017,bonds_payable_ntd_m,0.0,NTD_million,balance,,,2017-Q4,data/raw/mops_financials/6274_2017_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2017&SSEASON=4&REPORT_ID=C,not_present_assumed_zero
+2017,long_term_borrowings_ntd_m,616.2860000000001,NTD_million,balance,,長期借款合計,2017-Q4,data/raw/mops_financials/6274_2017_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2017&SSEASON=4&REPORT_ID=C,reported
+2017,total_liabilities_ntd_m,5533.192,NTD_million,balance,,負債總計,2017-Q4,data/raw/mops_financials/6274_2017_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2017&SSEASON=4&REPORT_ID=C,reported
+2017,equity_ntd_m,7015.853,NTD_million,balance,,權益總額,2017-Q4,data/raw/mops_financials/6274_2017_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2017&SSEASON=4&REPORT_ID=C,reported
+2018,cash_dividend_ntd_m,1116.0,NTD_million,statement_of_changes_in_equity,B5,普通股現金股利 Cash dividends of ordinary share,2019-Q4,data/raw/mops_financials/6274_2019_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2019&SSEASON=4&REPORT_ID=C,reported cash dividend paid in following period
+2018,revenue_ntd_m,17787.226,NTD_million,income,,營業收入合計,2018-Q4,data/raw/mops_financials/6274_2018_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2018&SSEASON=4&REPORT_ID=C,reported
+2018,cogs_ntd_m,13765.229000000001,NTD_million,income,,營業成本合計,2018-Q4,data/raw/mops_financials/6274_2018_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2018&SSEASON=4&REPORT_ID=C,reported
+2018,gross_profit_ntd_m,4021.9970000000003,NTD_million,income,,營業毛利（毛損）,2018-Q4,data/raw/mops_financials/6274_2018_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2018&SSEASON=4&REPORT_ID=C,reported
+2018,opex_ntd_m,1622.38,NTD_million,income,,營業費用合計,2018-Q4,data/raw/mops_financials/6274_2018_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2018&SSEASON=4&REPORT_ID=C,reported
+2018,operating_income_ntd_m,2399.617,NTD_million,income,,營業利益（損失）,2018-Q4,data/raw/mops_financials/6274_2018_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2018&SSEASON=4&REPORT_ID=C,reported
+2018,pbt_ntd_m,2393.238,NTD_million,income,,繼續營業單位稅前淨利（淨損）,2018-Q4,data/raw/mops_financials/6274_2018_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2018&SSEASON=4&REPORT_ID=C,reported
+2018,tax_ntd_m,556.758,NTD_million,income,,所得稅費用（利益）合計,2018-Q4,data/raw/mops_financials/6274_2018_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2018&SSEASON=4&REPORT_ID=C,reported
+2018,net_income_ntd_m,1836.48,NTD_million,income,,本期淨利（淨損）,2018-Q4,data/raw/mops_financials/6274_2018_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2018&SSEASON=4&REPORT_ID=C,reported
+2018,eps_ntd,7.46,NTD,income,,基本每股盈餘合計,2018-Q4,data/raw/mops_financials/6274_2018_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2018&SSEASON=4&REPORT_ID=C,reported
+2018,cash_ntd_m,2239.236,NTD_million,balance,,現金及約當現金,2018-Q4,data/raw/mops_financials/6274_2018_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2018&SSEASON=4&REPORT_ID=C,reported
+2018,accounts_receivable_ntd_m,5590.29,NTD_million,balance,,應收帳款淨額,2018-Q4,data/raw/mops_financials/6274_2018_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2018&SSEASON=4&REPORT_ID=C,reported
+2018,inventory_ntd_m,1993.432,NTD_million,balance,,存貨,2018-Q4,data/raw/mops_financials/6274_2018_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2018&SSEASON=4&REPORT_ID=C,reported
+2018,current_assets_ntd_m,12039.244,NTD_million,balance,,流動資產合計,2018-Q4,data/raw/mops_financials/6274_2018_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2018&SSEASON=4&REPORT_ID=C,reported
+2018,ppe_ntd_m,2464.831,NTD_million,balance,,不動產、廠房及設備,2018-Q4,data/raw/mops_financials/6274_2018_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2018&SSEASON=4&REPORT_ID=C,reported
+2018,total_assets_ntd_m,15613.891,NTD_million,balance,,資產總計,2018-Q4,data/raw/mops_financials/6274_2018_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2018&SSEASON=4&REPORT_ID=C,reported
+2018,short_term_borrowings_ntd_m,356.93,NTD_million,balance,,短期借款,2018-Q4,data/raw/mops_financials/6274_2018_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2018&SSEASON=4&REPORT_ID=C,reported
+2018,accounts_payable_ntd_m,3471.01,NTD_million,balance,,應付帳款,2018-Q4,data/raw/mops_financials/6274_2018_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2018&SSEASON=4&REPORT_ID=C,reported
+2018,current_liabilities_ntd_m,5053.969,NTD_million,balance,,流動負債合計,2018-Q4,data/raw/mops_financials/6274_2018_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2018&SSEASON=4&REPORT_ID=C,reported
+2018,bonds_payable_ntd_m,1415.792,NTD_million,balance,,應付公司債,2018-Q4,data/raw/mops_financials/6274_2018_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2018&SSEASON=4&REPORT_ID=C,reported
+2018,long_term_borrowings_ntd_m,737.0210000000001,NTD_million,balance,,長期借款,2018-Q4,data/raw/mops_financials/6274_2018_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2018&SSEASON=4&REPORT_ID=C,reported
+2018,total_liabilities_ntd_m,7414.991,NTD_million,balance,,負債總計,2018-Q4,data/raw/mops_financials/6274_2018_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2018&SSEASON=4&REPORT_ID=C,reported
+2018,equity_ntd_m,8198.9,NTD_million,balance,,權益總計,2018-Q4,data/raw/mops_financials/6274_2018_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2018&SSEASON=4&REPORT_ID=C,reported
+2019,cash_dividend_ntd_m,1221.0,NTD_million,statement_of_changes_in_equity,B5,普通股現金股利 Cash dividends of ordinary share,2020-Q4,data/raw/mops_financials/6274_2020_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2020&SSEASON=4&REPORT_ID=C,reported cash dividend paid in following period
+2019,revenue_ntd_m,17527.071,NTD_million,income,4000,營業收入合計　Total operating revenue,2019-Q4,data/raw/mops_financials/6274_2019_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2019&SSEASON=4&REPORT_ID=C,reported
+2019,cogs_ntd_m,13389.446,NTD_million,income,5000,營業成本合計　Total operating costs,2019-Q4,data/raw/mops_financials/6274_2019_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2019&SSEASON=4&REPORT_ID=C,reported
+2019,gross_profit_ntd_m,4137.625,NTD_million,income,5900,營業毛利（毛損）Gross profit (loss) from operations,2019-Q4,data/raw/mops_financials/6274_2019_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2019&SSEASON=4&REPORT_ID=C,reported
+2019,opex_ntd_m,1980.808,NTD_million,income,6000,營業費用合計　Total operating expenses,2019-Q4,data/raw/mops_financials/6274_2019_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2019&SSEASON=4&REPORT_ID=C,reported
+2019,operating_income_ntd_m,2156.817,NTD_million,income,6900,營業利益（損失）Net operating income (loss),2019-Q4,data/raw/mops_financials/6274_2019_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2019&SSEASON=4&REPORT_ID=C,reported
+2019,pbt_ntd_m,2235.116,NTD_million,income,7900,繼續營業單位稅前淨利（淨損）Profit (loss) from continuing operations before tax,2019-Q4,data/raw/mops_financials/6274_2019_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2019&SSEASON=4&REPORT_ID=C,reported
+2019,tax_ntd_m,482.67400000000004,NTD_million,income,7950,所得稅費用（利益）合計　Total tax expense (income),2019-Q4,data/raw/mops_financials/6274_2019_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2019&SSEASON=4&REPORT_ID=C,reported
+2019,net_income_ntd_m,1752.442,NTD_million,income,8200,本期淨利（淨損）Profit (loss),2019-Q4,data/raw/mops_financials/6274_2019_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2019&SSEASON=4&REPORT_ID=C,reported
+2019,eps_ntd,6.92,NTD,income,9750,基本每股盈餘合計　Total basic earnings per share,2019-Q4,data/raw/mops_financials/6274_2019_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2019&SSEASON=4&REPORT_ID=C,reported
+2019,cash_ntd_m,3318.827,NTD_million,balance,1100,現金及約當現金 Cash and cash equivalents,2019-Q4,data/raw/mops_financials/6274_2019_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2019&SSEASON=4&REPORT_ID=C,reported
+2019,accounts_receivable_ntd_m,6056.032,NTD_million,balance,1170,"應收帳款淨額 Accounts receivable, net",2019-Q4,data/raw/mops_financials/6274_2019_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2019&SSEASON=4&REPORT_ID=C,reported
+2019,inventory_ntd_m,2467.193,NTD_million,balance,130X,存貨 Current inventories,2019-Q4,data/raw/mops_financials/6274_2019_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2019&SSEASON=4&REPORT_ID=C,reported
+2019,current_assets_ntd_m,13360.333,NTD_million,balance,11XX,流動資產合計 Total current assets,2019-Q4,data/raw/mops_financials/6274_2019_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2019&SSEASON=4&REPORT_ID=C,reported
+2019,ppe_ntd_m,3084.342,NTD_million,balance,1600,"不動產、廠房及設備 Property, plant and equipment",2019-Q4,data/raw/mops_financials/6274_2019_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2019&SSEASON=4&REPORT_ID=C,reported
+2019,total_assets_ntd_m,18014.157,NTD_million,balance,1XXX,資產總計　Total assets,2019-Q4,data/raw/mops_financials/6274_2019_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2019&SSEASON=4&REPORT_ID=C,reported
+2019,short_term_borrowings_ntd_m,431.607,NTD_million,balance,2100,短期借款 Current borrowings,2019-Q4,data/raw/mops_financials/6274_2019_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2019&SSEASON=4&REPORT_ID=C,reported
+2019,accounts_payable_ntd_m,3965.87,NTD_million,balance,2170,應付帳款 Accounts payable,2019-Q4,data/raw/mops_financials/6274_2019_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2019&SSEASON=4&REPORT_ID=C,reported
+2019,current_liabilities_ntd_m,6329.621,NTD_million,balance,21XX,流動負債合計 Total current liabilities,2019-Q4,data/raw/mops_financials/6274_2019_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2019&SSEASON=4&REPORT_ID=C,reported
+2019,bonds_payable_ntd_m,0.0,NTD_million,balance,2530,應付公司債 Bonds payable,2019-Q4,data/raw/mops_financials/6274_2019_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2019&SSEASON=4&REPORT_ID=C,reported
+2019,long_term_borrowings_ntd_m,1362.953,NTD_million,balance,2540,長期借款 Non-current portion of non-current borrowings,2019-Q4,data/raw/mops_financials/6274_2019_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2019&SSEASON=4&REPORT_ID=C,reported
+2019,total_liabilities_ntd_m,7914.357,NTD_million,balance,2XXX,負債總計 Total liabilities,2019-Q4,data/raw/mops_financials/6274_2019_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2019&SSEASON=4&REPORT_ID=C,reported
+2019,equity_ntd_m,10099.800000000001,NTD_million,balance,3XXX,權益總計 Total equity,2019-Q4,data/raw/mops_financials/6274_2019_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2019&SSEASON=4&REPORT_ID=C,reported
+2020,cash_dividend_ntd_m,1287.0,NTD_million,statement_of_changes_in_equity,B5,普通股現金股利 Cash dividends of ordinary share,2021-Q4,data/raw/mops_financials/6274_2021_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2021&SSEASON=4&REPORT_ID=C,reported cash dividend paid in following period
+2020,revenue_ntd_m,18046.852,NTD_million,income,4000,營業收入合計　Total operating revenue,2020-Q4,data/raw/mops_financials/6274_2020_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2020&SSEASON=4&REPORT_ID=C,reported
+2020,cogs_ntd_m,13822.206,NTD_million,income,5000,營業成本合計　Total operating costs,2020-Q4,data/raw/mops_financials/6274_2020_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2020&SSEASON=4&REPORT_ID=C,reported
+2020,gross_profit_ntd_m,4224.646,NTD_million,income,5900,營業毛利（毛損）Gross profit (loss) from operations,2020-Q4,data/raw/mops_financials/6274_2020_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2020&SSEASON=4&REPORT_ID=C,reported
+2020,opex_ntd_m,1951.179,NTD_million,income,6000,營業費用合計　Total operating expenses,2020-Q4,data/raw/mops_financials/6274_2020_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2020&SSEASON=4&REPORT_ID=C,reported
+2020,operating_income_ntd_m,2273.467,NTD_million,income,6900,營業利益（損失）Net operating income (loss),2020-Q4,data/raw/mops_financials/6274_2020_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2020&SSEASON=4&REPORT_ID=C,reported
+2020,pbt_ntd_m,2263.777,NTD_million,income,7900,繼續營業單位稅前淨利（淨損）Profit (loss) from continuing operations before tax,2020-Q4,data/raw/mops_financials/6274_2020_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2020&SSEASON=4&REPORT_ID=C,reported
+2020,tax_ntd_m,488.216,NTD_million,income,7950,所得稅費用（利益）合計　Total tax expense (income),2020-Q4,data/raw/mops_financials/6274_2020_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2020&SSEASON=4&REPORT_ID=C,reported
+2020,net_income_ntd_m,1775.5610000000001,NTD_million,income,8200,本期淨利（淨損）Profit (loss),2020-Q4,data/raw/mops_financials/6274_2020_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2020&SSEASON=4&REPORT_ID=C,reported
+2020,eps_ntd,6.67,NTD,income,9750,基本每股盈餘合計　Total basic earnings per share,2020-Q4,data/raw/mops_financials/6274_2020_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2020&SSEASON=4&REPORT_ID=C,reported
+2020,cash_ntd_m,3137.4990000000003,NTD_million,balance,1100,現金及約當現金 Cash and cash equivalents,2020-Q4,data/raw/mops_financials/6274_2020_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2020&SSEASON=4&REPORT_ID=C,reported
+2020,accounts_receivable_ntd_m,4795.466,NTD_million,balance,1170,"應收帳款淨額 Accounts receivable, net",2020-Q4,data/raw/mops_financials/6274_2020_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2020&SSEASON=4&REPORT_ID=C,reported
+2020,inventory_ntd_m,2229.416,NTD_million,balance,130X,存貨 Current inventories,2020-Q4,data/raw/mops_financials/6274_2020_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2020&SSEASON=4&REPORT_ID=C,reported
+2020,current_assets_ntd_m,14609.264000000001,NTD_million,balance,11XX,流動資產合計 Total current assets,2020-Q4,data/raw/mops_financials/6274_2020_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2020&SSEASON=4&REPORT_ID=C,reported
+2020,ppe_ntd_m,4096.262,NTD_million,balance,1600,"不動產、廠房及設備 Property, plant and equipment",2020-Q4,data/raw/mops_financials/6274_2020_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2020&SSEASON=4&REPORT_ID=C,reported
+2020,total_assets_ntd_m,19379.666,NTD_million,balance,1XXX,資產總計　Total assets,2020-Q4,data/raw/mops_financials/6274_2020_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2020&SSEASON=4&REPORT_ID=C,reported
+2020,short_term_borrowings_ntd_m,428.284,NTD_million,balance,2100,短期借款 Current borrowings,2020-Q4,data/raw/mops_financials/6274_2020_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2020&SSEASON=4&REPORT_ID=C,reported
+2020,accounts_payable_ntd_m,3008.224,NTD_million,balance,2170,應付帳款 Accounts payable,2020-Q4,data/raw/mops_financials/6274_2020_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2020&SSEASON=4&REPORT_ID=C,reported
+2020,current_liabilities_ntd_m,4682.412,NTD_million,balance,21XX,流動負債合計 Total current liabilities,2020-Q4,data/raw/mops_financials/6274_2020_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2020&SSEASON=4&REPORT_ID=C,reported
+2020,bonds_payable_ntd_m,1720.789,NTD_million,balance,2530,應付公司債 Bonds payable,2020-Q4,data/raw/mops_financials/6274_2020_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2020&SSEASON=4&REPORT_ID=C,reported
+2020,long_term_borrowings_ntd_m,1722.217,NTD_million,balance,2540,長期借款 Non-current portion of non-current borrowings,2020-Q4,data/raw/mops_financials/6274_2020_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2020&SSEASON=4&REPORT_ID=C,reported
+2020,total_liabilities_ntd_m,8352.455,NTD_million,balance,2XXX,負債總計 Total liabilities,2020-Q4,data/raw/mops_financials/6274_2020_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2020&SSEASON=4&REPORT_ID=C,reported
+2020,equity_ntd_m,11027.211,NTD_million,balance,3XXX,權益總額 Total equity,2020-Q4,data/raw/mops_financials/6274_2020_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2020&SSEASON=4&REPORT_ID=C,reported
+2021,cash_dividend_ntd_m,1347.0,NTD_million,statement_of_changes_in_equity,B5,普通股現金股利 Cash dividends of ordinary share,2022-Q4,data/raw/mops_financials/6274_2022_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2022&SSEASON=4&REPORT_ID=C,reported cash dividend paid in following period
+2021,revenue_ntd_m,21132.04,NTD_million,income,4000,營業收入合計　Total operating revenue,2021-Q4,data/raw/mops_financials/6274_2021_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2021&SSEASON=4&REPORT_ID=C,reported
+2021,cogs_ntd_m,16701.679,NTD_million,income,5000,營業成本合計　Total operating costs,2021-Q4,data/raw/mops_financials/6274_2021_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2021&SSEASON=4&REPORT_ID=C,reported
+2021,gross_profit_ntd_m,4430.361,NTD_million,income,5900,營業毛利（毛損）Gross profit (loss) from operations,2021-Q4,data/raw/mops_financials/6274_2021_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2021&SSEASON=4&REPORT_ID=C,reported
+2021,opex_ntd_m,2050.322,NTD_million,income,6000,營業費用合計　Total operating expenses,2021-Q4,data/raw/mops_financials/6274_2021_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2021&SSEASON=4&REPORT_ID=C,reported
+2021,operating_income_ntd_m,2380.039,NTD_million,income,6900,營業利益（損失）Net operating income (loss),2021-Q4,data/raw/mops_financials/6274_2021_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2021&SSEASON=4&REPORT_ID=C,reported
+2021,pbt_ntd_m,2413.332,NTD_million,income,7900,繼續營業單位稅前淨利（淨損）Profit (loss) from continuing operations before tax,2021-Q4,data/raw/mops_financials/6274_2021_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2021&SSEASON=4&REPORT_ID=C,reported
+2021,tax_ntd_m,532.09,NTD_million,income,7950,所得稅費用（利益）合計　Total tax expense (income),2021-Q4,data/raw/mops_financials/6274_2021_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2021&SSEASON=4&REPORT_ID=C,reported
+2021,net_income_ntd_m,1881.242,NTD_million,income,8200,本期淨利（淨損）Profit (loss),2021-Q4,data/raw/mops_financials/6274_2021_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2021&SSEASON=4&REPORT_ID=C,reported
+2021,eps_ntd,7.01,NTD,income,9750,基本每股盈餘合計　Total basic earnings per share,2021-Q4,data/raw/mops_financials/6274_2021_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2021&SSEASON=4&REPORT_ID=C,reported
+2021,cash_ntd_m,4717.2880000000005,NTD_million,balance,1100,現金及約當現金 Cash and cash equivalents,2021-Q4,data/raw/mops_financials/6274_2021_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2021&SSEASON=4&REPORT_ID=C,reported
+2021,accounts_receivable_ntd_m,6687.953,NTD_million,balance,1170,"應收帳款淨額 Accounts receivable, net",2021-Q4,data/raw/mops_financials/6274_2021_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2021&SSEASON=4&REPORT_ID=C,reported
+2021,inventory_ntd_m,2857.117,NTD_million,balance,130X,存貨 Current inventories,2021-Q4,data/raw/mops_financials/6274_2021_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2021&SSEASON=4&REPORT_ID=C,reported
+2021,current_assets_ntd_m,17202.159,NTD_million,balance,11XX,流動資產合計 Total current assets,2021-Q4,data/raw/mops_financials/6274_2021_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2021&SSEASON=4&REPORT_ID=C,reported
+2021,ppe_ntd_m,4319.736,NTD_million,balance,1600,"不動產、廠房及設備 Property, plant and equipment",2021-Q4,data/raw/mops_financials/6274_2021_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2021&SSEASON=4&REPORT_ID=C,reported
+2021,total_assets_ntd_m,21950.599000000002,NTD_million,balance,1XXX,資產總計　Total assets,2021-Q4,data/raw/mops_financials/6274_2021_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2021&SSEASON=4&REPORT_ID=C,reported
+2021,short_term_borrowings_ntd_m,446.904,NTD_million,balance,2100,短期借款 Current borrowings,2021-Q4,data/raw/mops_financials/6274_2021_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2021&SSEASON=4&REPORT_ID=C,reported
+2021,accounts_payable_ntd_m,4602.236,NTD_million,balance,2170,應付帳款 Accounts payable,2021-Q4,data/raw/mops_financials/6274_2021_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2021&SSEASON=4&REPORT_ID=C,reported
+2021,current_liabilities_ntd_m,6440.235000000001,NTD_million,balance,21XX,流動負債合計 Total current liabilities,2021-Q4,data/raw/mops_financials/6274_2021_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2021&SSEASON=4&REPORT_ID=C,reported
+2021,bonds_payable_ntd_m,1738.826,NTD_million,balance,2530,應付公司債 Bonds payable,2021-Q4,data/raw/mops_financials/6274_2021_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2021&SSEASON=4&REPORT_ID=C,reported
+2021,long_term_borrowings_ntd_m,1782.58,NTD_million,balance,2540,長期借款 Non-current portion of non-current borrowings,2021-Q4,data/raw/mops_financials/6274_2021_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2021&SSEASON=4&REPORT_ID=C,reported
+2021,total_liabilities_ntd_m,10213.89,NTD_million,balance,2XXX,負債總計 Total liabilities,2021-Q4,data/raw/mops_financials/6274_2021_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2021&SSEASON=4&REPORT_ID=C,reported
+2021,equity_ntd_m,11736.709,NTD_million,balance,3XXX,權益總額 Total equity,2021-Q4,data/raw/mops_financials/6274_2021_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2021&SSEASON=4&REPORT_ID=C,reported
+2022,cash_dividend_ntd_m,1076.608,NTD_million,statement_of_changes_in_equity,B5,普通股現金股利 Cash dividends of ordinary share,2023-Q4,data/raw/mops_financials/6274_2023_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2023&SSEASON=4&REPORT_ID=C,reported cash dividend paid in following period
+2022,revenue_ntd_m,18472.128,NTD_million,income,4000,營業收入合計　Total operating revenue,2022-Q4,data/raw/mops_financials/6274_2022_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2022&SSEASON=4&REPORT_ID=C,reported
+2022,cogs_ntd_m,15066.947,NTD_million,income,5000,營業成本合計　Total operating costs,2022-Q4,data/raw/mops_financials/6274_2022_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2022&SSEASON=4&REPORT_ID=C,reported
+2022,gross_profit_ntd_m,3405.181,NTD_million,income,5900,營業毛利（毛損）Gross profit (loss) from operations,2022-Q4,data/raw/mops_financials/6274_2022_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2022&SSEASON=4&REPORT_ID=C,reported
+2022,opex_ntd_m,1907.5810000000001,NTD_million,income,6000,營業費用合計　Total operating expenses,2022-Q4,data/raw/mops_financials/6274_2022_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2022&SSEASON=4&REPORT_ID=C,reported
+2022,operating_income_ntd_m,1497.6000000000001,NTD_million,income,6900,營業利益（損失）Net operating income (loss),2022-Q4,data/raw/mops_financials/6274_2022_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2022&SSEASON=4&REPORT_ID=C,reported
+2022,pbt_ntd_m,1620.963,NTD_million,income,7900,繼續營業單位稅前淨利（淨損）Profit (loss) from continuing operations before tax,2022-Q4,data/raw/mops_financials/6274_2022_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2022&SSEASON=4&REPORT_ID=C,reported
+2022,tax_ntd_m,359.539,NTD_million,income,7950,所得稅費用（利益）合計　Total tax expense (income),2022-Q4,data/raw/mops_financials/6274_2022_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2022&SSEASON=4&REPORT_ID=C,reported
+2022,net_income_ntd_m,1261.424,NTD_million,income,8200,本期淨利（淨損）Profit (loss),2022-Q4,data/raw/mops_financials/6274_2022_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2022&SSEASON=4&REPORT_ID=C,reported
+2022,eps_ntd,4.69,NTD,income,9750,基本每股盈餘合計　Total basic earnings per share,2022-Q4,data/raw/mops_financials/6274_2022_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2022&SSEASON=4&REPORT_ID=C,reported
+2022,cash_ntd_m,5890.505,NTD_million,balance,1100,現金及約當現金 Cash and cash equivalents,2022-Q4,data/raw/mops_financials/6274_2022_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2022&SSEASON=4&REPORT_ID=C,reported
+2022,accounts_receivable_ntd_m,5608.825,NTD_million,balance,1170,"應收帳款淨額 Accounts receivable, net",2022-Q4,data/raw/mops_financials/6274_2022_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2022&SSEASON=4&REPORT_ID=C,reported
+2022,inventory_ntd_m,1965.339,NTD_million,balance,130X,存貨 Current inventories,2022-Q4,data/raw/mops_financials/6274_2022_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2022&SSEASON=4&REPORT_ID=C,reported
+2022,current_assets_ntd_m,15083.655,NTD_million,balance,11XX,流動資產合計 Total current assets,2022-Q4,data/raw/mops_financials/6274_2022_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2022&SSEASON=4&REPORT_ID=C,reported
+2022,ppe_ntd_m,4286.557,NTD_million,balance,1600,"不動產、廠房及設備 Property, plant and equipment",2022-Q4,data/raw/mops_financials/6274_2022_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2022&SSEASON=4&REPORT_ID=C,reported
+2022,total_assets_ntd_m,19762.525,NTD_million,balance,1XXX,資產總計　Total assets,2022-Q4,data/raw/mops_financials/6274_2022_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2022&SSEASON=4&REPORT_ID=C,reported
+2022,short_term_borrowings_ntd_m,61.42,NTD_million,balance,2100,短期借款 Current borrowings,2022-Q4,data/raw/mops_financials/6274_2022_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2022&SSEASON=4&REPORT_ID=C,reported
+2022,accounts_payable_ntd_m,3268.531,NTD_million,balance,2170,應付帳款 Accounts payable,2022-Q4,data/raw/mops_financials/6274_2022_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2022&SSEASON=4&REPORT_ID=C,reported
+2022,current_liabilities_ntd_m,6553.319,NTD_million,balance,21XX,流動負債合計 Total current liabilities,2022-Q4,data/raw/mops_financials/6274_2022_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2022&SSEASON=4&REPORT_ID=C,reported
+2022,bonds_payable_ntd_m,0.0,NTD_million,balance,2530,應付公司債 Bonds payable,2022-Q4,data/raw/mops_financials/6274_2022_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2022&SSEASON=4&REPORT_ID=C,reported
+2022,long_term_borrowings_ntd_m,1146.1680000000001,NTD_million,balance,2540,長期借款 Non-current portion of non-current borrowings,2022-Q4,data/raw/mops_financials/6274_2022_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2022&SSEASON=4&REPORT_ID=C,reported
+2022,total_liabilities_ntd_m,7904.245,NTD_million,balance,2XXX,負債總計 Total liabilities,2022-Q4,data/raw/mops_financials/6274_2022_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2022&SSEASON=4&REPORT_ID=C,reported
+2022,equity_ntd_m,11858.28,NTD_million,balance,3XXX,權益總額 Total equity,2022-Q4,data/raw/mops_financials/6274_2022_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2022&SSEASON=4&REPORT_ID=C,reported
+2023,cash_dividend_ntd_m,1090.0,NTD_million,statement_of_changes_in_equity,B5,普通股現金股利 Cash dividends of ordinary share,2024-Q4,data/raw/mops_financials/6274_2024_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2024&SSEASON=4&REPORT_ID=C,reported cash dividend paid in following period
+2023,revenue_ntd_m,16002.537,NTD_million,income,4000,營業收入合計　Total operating revenue,2023-Q4,data/raw/mops_financials/6274_2023_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2023&SSEASON=4&REPORT_ID=C,reported
+2023,cogs_ntd_m,12843.562,NTD_million,income,5000,營業成本合計　Total operating costs,2023-Q4,data/raw/mops_financials/6274_2023_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2023&SSEASON=4&REPORT_ID=C,reported
+2023,gross_profit_ntd_m,3158.975,NTD_million,income,5900,營業毛利（毛損）Gross profit (loss) from operations,2023-Q4,data/raw/mops_financials/6274_2023_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2023&SSEASON=4&REPORT_ID=C,reported
+2023,opex_ntd_m,1734.6480000000001,NTD_million,income,6000,營業費用合計　Total operating expenses,2023-Q4,data/raw/mops_financials/6274_2023_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2023&SSEASON=4&REPORT_ID=C,reported
+2023,operating_income_ntd_m,1424.327,NTD_million,income,6900,營業利益（損失）Net operating income (loss),2023-Q4,data/raw/mops_financials/6274_2023_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2023&SSEASON=4&REPORT_ID=C,reported
+2023,pbt_ntd_m,1549.905,NTD_million,income,7900,繼續營業單位稅前淨利（淨損）Profit (loss) from continuing operations before tax,2023-Q4,data/raw/mops_financials/6274_2023_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2023&SSEASON=4&REPORT_ID=C,reported
+2023,tax_ntd_m,726.47,NTD_million,income,7950,所得稅費用（利益）合計　Total tax expense (income),2023-Q4,data/raw/mops_financials/6274_2023_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2023&SSEASON=4&REPORT_ID=C,reported
+2023,net_income_ntd_m,823.4350000000001,NTD_million,income,8200,本期淨利（淨損）Profit (loss),2023-Q4,data/raw/mops_financials/6274_2023_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2023&SSEASON=4&REPORT_ID=C,reported
+2023,eps_ntd,3.05,NTD,income,9750,基本每股盈餘合計　Total basic earnings per share,2023-Q4,data/raw/mops_financials/6274_2023_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2023&SSEASON=4&REPORT_ID=C,reported
+2023,cash_ntd_m,4958.245,NTD_million,balance,1100,現金及約當現金 Cash and cash equivalents,2023-Q4,data/raw/mops_financials/6274_2023_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2023&SSEASON=4&REPORT_ID=C,reported
+2023,accounts_receivable_ntd_m,5936.439,NTD_million,balance,1170,"應收帳款淨額 Accounts receivable, net",2023-Q4,data/raw/mops_financials/6274_2023_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2023&SSEASON=4&REPORT_ID=C,reported
+2023,inventory_ntd_m,2061.458,NTD_million,balance,130X,存貨 Current inventories,2023-Q4,data/raw/mops_financials/6274_2023_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2023&SSEASON=4&REPORT_ID=C,reported
+2023,current_assets_ntd_m,14618.475,NTD_million,balance,11XX,流動資產合計 Total current assets,2023-Q4,data/raw/mops_financials/6274_2023_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2023&SSEASON=4&REPORT_ID=C,reported
+2023,ppe_ntd_m,4520.052,NTD_million,balance,1600,"不動產、廠房及設備 Property, plant and equipment",2023-Q4,data/raw/mops_financials/6274_2023_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2023&SSEASON=4&REPORT_ID=C,reported
+2023,total_assets_ntd_m,19419.632,NTD_million,balance,1XXX,資產總計　Total assets,2023-Q4,data/raw/mops_financials/6274_2023_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2023&SSEASON=4&REPORT_ID=C,reported
+2023,short_term_borrowings_ntd_m,184.684,NTD_million,balance,2100,短期借款 Current borrowings,2023-Q4,data/raw/mops_financials/6274_2023_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2023&SSEASON=4&REPORT_ID=C,reported
+2023,accounts_payable_ntd_m,3787.266,NTD_million,balance,2170,應付帳款 Accounts payable,2023-Q4,data/raw/mops_financials/6274_2023_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2023&SSEASON=4&REPORT_ID=C,reported
+2023,current_liabilities_ntd_m,5547.622,NTD_million,balance,21XX,流動負債合計 Total current liabilities,2023-Q4,data/raw/mops_financials/6274_2023_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2023&SSEASON=4&REPORT_ID=C,reported
+2023,bonds_payable_ntd_m,463.422,NTD_million,balance,2530,應付公司債 Bonds payable,2023-Q4,data/raw/mops_financials/6274_2023_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2023&SSEASON=4&REPORT_ID=C,reported
+2023,long_term_borrowings_ntd_m,1642.453,NTD_million,balance,2540,長期借款 Non-current portion of non-current borrowings,2023-Q4,data/raw/mops_financials/6274_2023_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2023&SSEASON=4&REPORT_ID=C,reported
+2023,total_liabilities_ntd_m,7840.110000000001,NTD_million,balance,2XXX,負債總計 Total liabilities,2023-Q4,data/raw/mops_financials/6274_2023_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2023&SSEASON=4&REPORT_ID=C,reported
+2023,equity_ntd_m,11579.522,NTD_million,balance,3XXX,權益總額 Total equity,2023-Q4,data/raw/mops_financials/6274_2023_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2023&SSEASON=4&REPORT_ID=C,reported
+2024,cash_dividend_ntd_m,1797.0,NTD_million,statement_of_changes_in_equity,B5,普通股現金股利 Cash dividends of ordinary share,2025-Q4,data/raw/mops_financials/6274_2025_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2025&SSEASON=4&REPORT_ID=C,reported cash dividend paid in following period
+2024,revenue_ntd_m,23070.425,NTD_million,income,4000,營業收入合計　Total operating revenue,2024-Q4,data/raw/mops_financials/6274_2024_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2024&SSEASON=4&REPORT_ID=C,reported
+2024,cogs_ntd_m,17728.872,NTD_million,income,5000,營業成本合計　Total operating costs,2024-Q4,data/raw/mops_financials/6274_2024_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2024&SSEASON=4&REPORT_ID=C,reported
+2024,gross_profit_ntd_m,5341.553,NTD_million,income,5900,營業毛利（毛損）Gross profit (loss) from operations,2024-Q4,data/raw/mops_financials/6274_2024_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2024&SSEASON=4&REPORT_ID=C,reported
+2024,opex_ntd_m,2009.683,NTD_million,income,6000,營業費用合計　Total operating expenses,2024-Q4,data/raw/mops_financials/6274_2024_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2024&SSEASON=4&REPORT_ID=C,reported
+2024,operating_income_ntd_m,3331.87,NTD_million,income,6900,營業利益（損失）Net operating income (loss),2024-Q4,data/raw/mops_financials/6274_2024_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2024&SSEASON=4&REPORT_ID=C,reported
+2024,pbt_ntd_m,3377.634,NTD_million,income,7900,繼續營業單位稅前淨利（淨損）Profit (loss) from continuing operations before tax,2024-Q4,data/raw/mops_financials/6274_2024_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2024&SSEASON=4&REPORT_ID=C,reported
+2024,tax_ntd_m,773.266,NTD_million,income,7950,所得稅費用（利益）合計　Total tax expense (income),2024-Q4,data/raw/mops_financials/6274_2024_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2024&SSEASON=4&REPORT_ID=C,reported
+2024,net_income_ntd_m,2604.368,NTD_million,income,8200,本期淨利（淨損）Profit (loss),2024-Q4,data/raw/mops_financials/6274_2024_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2024&SSEASON=4&REPORT_ID=C,reported
+2024,eps_ntd,9.56,NTD,income,9750,基本每股盈餘合計　Total basic earnings per share,2024-Q4,data/raw/mops_financials/6274_2024_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2024&SSEASON=4&REPORT_ID=C,reported
+2024,cash_ntd_m,6280.003,NTD_million,balance,1100,現金及約當現金 Cash and cash equivalents,2024-Q4,data/raw/mops_financials/6274_2024_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2024&SSEASON=4&REPORT_ID=C,reported
+2024,accounts_receivable_ntd_m,8691.167,NTD_million,balance,1170,"應收帳款淨額 Accounts receivable, net",2024-Q4,data/raw/mops_financials/6274_2024_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2024&SSEASON=4&REPORT_ID=C,reported
+2024,inventory_ntd_m,3189.127,NTD_million,balance,130X,存貨 Current inventories,2024-Q4,data/raw/mops_financials/6274_2024_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2024&SSEASON=4&REPORT_ID=C,reported
+2024,current_assets_ntd_m,20264.168,NTD_million,balance,11XX,流動資產合計 Total current assets,2024-Q4,data/raw/mops_financials/6274_2024_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2024&SSEASON=4&REPORT_ID=C,reported
+2024,ppe_ntd_m,4338.6810000000005,NTD_million,balance,1600,"不動產、廠房及設備 Property, plant and equipment",2024-Q4,data/raw/mops_financials/6274_2024_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2024&SSEASON=4&REPORT_ID=C,reported
+2024,total_assets_ntd_m,25877.883,NTD_million,balance,1XXX,資產總計　Total assets,2024-Q4,data/raw/mops_financials/6274_2024_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2024&SSEASON=4&REPORT_ID=C,reported
+2024,short_term_borrowings_ntd_m,543.36,NTD_million,balance,2100,短期借款 Current borrowings,2024-Q4,data/raw/mops_financials/6274_2024_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2024&SSEASON=4&REPORT_ID=C,reported
+2024,accounts_payable_ntd_m,5498.789,NTD_million,balance,2170,應付帳款 Accounts payable,2024-Q4,data/raw/mops_financials/6274_2024_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2024&SSEASON=4&REPORT_ID=C,reported
+2024,current_liabilities_ntd_m,7872.504,NTD_million,balance,21XX,流動負債合計 Total current liabilities,2024-Q4,data/raw/mops_financials/6274_2024_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2024&SSEASON=4&REPORT_ID=C,reported
+2024,bonds_payable_ntd_m,1925.555,NTD_million,balance,2530,應付公司債 Bonds payable,2024-Q4,data/raw/mops_financials/6274_2024_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2024&SSEASON=4&REPORT_ID=C,reported
+2024,long_term_borrowings_ntd_m,1523.738,NTD_million,balance,2540,長期借款 Non-current portion of non-current borrowings,2024-Q4,data/raw/mops_financials/6274_2024_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2024&SSEASON=4&REPORT_ID=C,reported
+2024,total_liabilities_ntd_m,11540.855,NTD_million,balance,2XXX,負債總計 Total liabilities,2024-Q4,data/raw/mops_financials/6274_2024_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2024&SSEASON=4&REPORT_ID=C,reported
+2024,equity_ntd_m,14337.028,NTD_million,balance,3XXX,權益總額 Total equity,2024-Q4,data/raw/mops_financials/6274_2024_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2024&SSEASON=4&REPORT_ID=C,reported
+2025,cash_dividend_ntd_m,2168.0,NTD_million,statement_of_changes_in_equity,B5,普通股現金股利 Cash dividends of ordinary share,2026-Q1,data/raw/mops_financials/6274_2026_Q1_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2026&SSEASON=1&REPORT_ID=C,reported cash dividend paid in following period
+2025,revenue_ntd_m,30340.235,NTD_million,income,4000,營業收入合計　Total operating revenue,2025-Q4,data/raw/mops_financials/6274_2025_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2025&SSEASON=4&REPORT_ID=C,reported
+2025,cogs_ntd_m,23442.442,NTD_million,income,5000,營業成本合計　Total operating costs,2025-Q4,data/raw/mops_financials/6274_2025_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2025&SSEASON=4&REPORT_ID=C,reported
+2025,gross_profit_ntd_m,6897.793000000001,NTD_million,income,5900,營業毛利（毛損）Gross profit (loss) from operations,2025-Q4,data/raw/mops_financials/6274_2025_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2025&SSEASON=4&REPORT_ID=C,reported
+2025,opex_ntd_m,2554.134,NTD_million,income,6000,營業費用合計　Total operating expenses,2025-Q4,data/raw/mops_financials/6274_2025_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2025&SSEASON=4&REPORT_ID=C,reported
+2025,operating_income_ntd_m,4343.659,NTD_million,income,6900,營業利益（損失）Net operating income (loss),2025-Q4,data/raw/mops_financials/6274_2025_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2025&SSEASON=4&REPORT_ID=C,reported
+2025,pbt_ntd_m,4518.612,NTD_million,income,7900,繼續營業單位稅前淨利（淨損）Profit (loss) from continuing operations before tax,2025-Q4,data/raw/mops_financials/6274_2025_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2025&SSEASON=4&REPORT_ID=C,reported
+2025,tax_ntd_m,1109.463,NTD_million,income,7950,所得稅費用（利益）合計　Total tax expense (income),2025-Q4,data/raw/mops_financials/6274_2025_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2025&SSEASON=4&REPORT_ID=C,reported
+2025,net_income_ntd_m,3409.149,NTD_million,income,8200,本期淨利（淨損）Profit (loss),2025-Q4,data/raw/mops_financials/6274_2025_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2025&SSEASON=4&REPORT_ID=C,reported
+2025,eps_ntd,12.13,NTD,income,9750,基本每股盈餘合計　Total basic earnings per share,2025-Q4,data/raw/mops_financials/6274_2025_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2025&SSEASON=4&REPORT_ID=C,reported
+2025,cash_ntd_m,5164.9580000000005,NTD_million,balance,1100,現金及約當現金 Cash and cash equivalents,2025-Q4,data/raw/mops_financials/6274_2025_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2025&SSEASON=4&REPORT_ID=C,reported
+2025,accounts_receivable_ntd_m,12890.971,NTD_million,balance,1170,"應收帳款淨額 Accounts receivable, net",2025-Q4,data/raw/mops_financials/6274_2025_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2025&SSEASON=4&REPORT_ID=C,reported
+2025,inventory_ntd_m,7404.8460000000005,NTD_million,balance,130X,存貨 Current inventories,2025-Q4,data/raw/mops_financials/6274_2025_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2025&SSEASON=4&REPORT_ID=C,reported
+2025,current_assets_ntd_m,32350.989,NTD_million,balance,11XX,流動資產合計 Total current assets,2025-Q4,data/raw/mops_financials/6274_2025_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2025&SSEASON=4&REPORT_ID=C,reported
+2025,ppe_ntd_m,5565.464,NTD_million,balance,1600,"不動產、廠房及設備 Property, plant and equipment",2025-Q4,data/raw/mops_financials/6274_2025_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2025&SSEASON=4&REPORT_ID=C,reported
+2025,total_assets_ntd_m,39741.090000000004,NTD_million,balance,1XXX,資產總計　Total assets,2025-Q4,data/raw/mops_financials/6274_2025_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2025&SSEASON=4&REPORT_ID=C,reported
+2025,short_term_borrowings_ntd_m,1817.8790000000001,NTD_million,balance,2100,短期借款 Current borrowings,2025-Q4,data/raw/mops_financials/6274_2025_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2025&SSEASON=4&REPORT_ID=C,reported
+2025,accounts_payable_ntd_m,10319.653,NTD_million,balance,2170,應付帳款 Accounts payable,2025-Q4,data/raw/mops_financials/6274_2025_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2025&SSEASON=4&REPORT_ID=C,reported
+2025,current_liabilities_ntd_m,14620.606,NTD_million,balance,21XX,流動負債合計 Total current liabilities,2025-Q4,data/raw/mops_financials/6274_2025_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2025&SSEASON=4&REPORT_ID=C,reported
+2025,bonds_payable_ntd_m,3618.056,NTD_million,balance,2530,應付公司債 Bonds payable,2025-Q4,data/raw/mops_financials/6274_2025_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2025&SSEASON=4&REPORT_ID=C,reported
+2025,long_term_borrowings_ntd_m,2685.556,NTD_million,balance,2540,長期借款 Non-current portion of non-current borrowings,2025-Q4,data/raw/mops_financials/6274_2025_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2025&SSEASON=4&REPORT_ID=C,reported
+2025,total_liabilities_ntd_m,21127.06,NTD_million,balance,2XXX,負債總計 Total liabilities,2025-Q4,data/raw/mops_financials/6274_2025_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2025&SSEASON=4&REPORT_ID=C,reported
+2025,equity_ntd_m,18614.03,NTD_million,balance,3XXX,權益總額 Total equity,2025-Q4,data/raw/mops_financials/6274_2025_Q4_C.html,https://mopsov.twse.com.tw/server-java/t164sb01?step=1&CO_ID=6274&SYEAR=2025&SSEASON=4&REPORT_ID=C,reported
+2016,sales_growth_pct,,percent,derived,,,2016,,,revenue_t / revenue_t-1 - 1
+2016,cogs_to_sales_pct,79.9659930414101,percent,derived,,,2016,,,cogs / revenue
+2016,gross_margin_pct,20.0340069585899,percent,derived,,,2016,,,gross_profit / revenue
+2016,opex_to_sales_pct,10.969393513764564,percent,derived,,,2016,,,opex / revenue
+2016,operating_margin_pct,9.064613444825337,percent,derived,,,2016,,,operating_income / revenue
+2016,days_sales_in_cash,31.476282407504325,days,derived,,,2016,,,ending_cash / revenue * 365
+2016,ar_collection_days,,days,derived,,,2016,,,average_AR / revenue * 365
+2016,inventory_turnover_x,,times,derived,,,2016,,,cogs / average_inventory
+2016,ap_payment_days,,days,derived,,,2016,,,average_AP / cogs * 365
+2016,effective_tax_rate_pct,22.238269185384326,percent,derived,,,2016,,,tax / PBT
+2016,dividend_payout_pct,56.30017670778119,percent,derived,,,2016,,,next-period ordinary cash dividend / net_income
+2017,sales_growth_pct,19.971351189904563,percent,derived,,,2017,,,revenue_t / revenue_t-1 - 1
+2017,cogs_to_sales_pct,79.27302200784675,percent,derived,,,2017,,,cogs / revenue
+2017,gross_margin_pct,20.72697799215324,percent,derived,,,2017,,,gross_profit / revenue
+2017,opex_to_sales_pct,12.398129789145779,percent,derived,,,2017,,,opex / revenue
+2017,operating_margin_pct,8.328848203007462,percent,derived,,,2017,,,operating_income / revenue
+2017,days_sales_in_cash,25.428876576230667,days,derived,,,2017,,,ending_cash / revenue * 365
+2017,ar_collection_days,110.56833463214261,days,derived,,,2017,,,average_AR / revenue * 365
+2017,inventory_turnover_x,7.05814293269373,times,derived,,,2017,,,cogs / average_inventory
+2017,ap_payment_days,92.61837450654114,days,derived,,,2017,,,average_AP / cogs * 365
+2017,effective_tax_rate_pct,24.24805120346601,percent,derived,,,2017,,,tax / PBT
+2017,dividend_payout_pct,78.48110113178535,percent,derived,,,2017,,,next-period ordinary cash dividend / net_income
+2018,sales_growth_pct,10.457634815814053,percent,derived,,,2018,,,revenue_t / revenue_t-1 - 1
+2018,cogs_to_sales_pct,77.3882841540328,percent,derived,,,2018,,,cogs / revenue
+2018,gross_margin_pct,22.611715845967215,percent,derived,,,2018,,,gross_profit / revenue
+2018,opex_to_sales_pct,9.121040009274072,percent,derived,,,2018,,,opex / revenue
+2018,operating_margin_pct,13.490675836693145,percent,derived,,,2018,,,operating_income / revenue
+2018,days_sales_in_cash,45.949893479736524,days,derived,,,2018,,,ending_cash / revenue * 365
+2018,ar_collection_days,113.32796145391082,days,derived,,,2018,,,average_AR / revenue * 365
+2018,inventory_turnover_x,6.790163035194312,times,derived,,,2018,,,cogs / average_inventory
+2018,ap_payment_days,89.1368601641135,days,derived,,,2018,,,average_AP / cogs * 365
+2018,effective_tax_rate_pct,23.26379574451016,percent,derived,,,2018,,,tax / PBT
+2018,dividend_payout_pct,60.76842655514898,percent,derived,,,2018,,,next-period ordinary cash dividend / net_income
+2019,sales_growth_pct,-1.462594560838204,percent,derived,,,2019,,,revenue_t / revenue_t-1 - 1
+2019,cogs_to_sales_pct,76.39294665948462,percent,derived,,,2019,,,cogs / revenue
+2019,gross_margin_pct,23.607053340515368,percent,derived,,,2019,,,gross_profit / revenue
+2019,opex_to_sales_pct,11.301420528278799,percent,derived,,,2019,,,opex / revenue
+2019,operating_margin_pct,12.305632812236569,percent,derived,,,2019,,,operating_income / revenue
+2019,days_sales_in_cash,69.11433490513048,days,derived,,,2019,,,ending_cash / revenue * 365
+2019,ar_collection_days,121.26691133960716,days,derived,,,2019,,,average_AR / revenue * 365
+2019,inventory_turnover_x,6.003394591565083,times,derived,,,2019,,,cogs / average_inventory
+2019,ap_payment_days,101.36570250927484,days,derived,,,2019,,,average_AP / cogs * 365
+2019,effective_tax_rate_pct,21.595031309336967,percent,derived,,,2019,,,tax / PBT
+2019,dividend_payout_pct,69.67420319759513,percent,derived,,,2019,,,next-period ordinary cash dividend / net_income
+2020,sales_growth_pct,2.965589629893084,percent,derived,,,2020,,,revenue_t / revenue_t-1 - 1
+2020,cogs_to_sales_pct,76.59067631296583,percent,derived,,,2020,,,cogs / revenue
+2020,gross_margin_pct,23.40932368703417,percent,derived,,,2020,,,gross_profit / revenue
+2020,opex_to_sales_pct,10.811741571327788,percent,derived,,,2020,,,opex / revenue
+2020,operating_margin_pct,12.597582115706384,percent,derived,,,2020,,,operating_income / revenue
+2020,days_sales_in_cash,63.45633770366157,days,derived,,,2020,,,ending_cash / revenue * 365
+2020,ar_collection_days,109.73650058192976,days,derived,,,2020,,,average_AR / revenue * 365
+2020,inventory_turnover_x,5.886036499951348,times,derived,,,2020,,,cogs / average_inventory
+2020,ap_payment_days,92.08169484668367,days,derived,,,2020,,,average_AP / cogs * 365
+2020,effective_tax_rate_pct,21.56643520982853,percent,derived,,,2020,,,tax / PBT
+2020,dividend_payout_pct,72.4841331838219,percent,derived,,,2020,,,next-period ordinary cash dividend / net_income
+2021,sales_growth_pct,17.095435813403913,percent,derived,,,2021,,,revenue_t / revenue_t-1 - 1
+2021,cogs_to_sales_pct,79.03486364780683,percent,derived,,,2021,,,cogs / revenue
+2021,gross_margin_pct,20.965136352193163,percent,derived,,,2021,,,gross_profit / revenue
+2021,opex_to_sales_pct,9.702432893369501,percent,derived,,,2021,,,opex / revenue
+2021,operating_margin_pct,11.262703458823664,percent,derived,,,2021,,,operating_income / revenue
+2021,days_sales_in_cash,81.47865137487909,days,derived,,,2021,,,ending_cash / revenue * 365
+2021,ar_collection_days,99.17281850214178,days,derived,,,2021,,,average_AR / revenue * 365
+2021,inventory_turnover_x,6.567018831884114,times,derived,,,2021,,,cogs / average_inventory
+2021,ap_payment_days,83.15983979814244,days,derived,,,2021,,,average_AP / cogs * 365
+2021,effective_tax_rate_pct,22.047940357978103,percent,derived,,,2021,,,tax / PBT
+2021,dividend_payout_pct,71.60163338900577,percent,derived,,,2021,,,next-period ordinary cash dividend / net_income
+2022,sales_growth_pct,-12.587104699782891,percent,derived,,,2022,,,revenue_t / revenue_t-1 - 1
+2022,cogs_to_sales_pct,81.56584341555018,percent,derived,,,2022,,,cogs / revenue
+2022,gross_margin_pct,18.434156584449827,percent,derived,,,2022,,,gross_profit / revenue
+2022,opex_to_sales_pct,10.3268069601943,percent,derived,,,2022,,,opex / revenue
+2022,operating_margin_pct,8.107349624255528,percent,derived,,,2022,,,operating_income / revenue
+2022,days_sales_in_cash,116.39342933310121,days,derived,,,2022,,,ending_cash / revenue * 365
+2022,ar_collection_days,121.48908804659646,days,derived,,,2022,,,average_AR / revenue * 365
+2022,inventory_turnover_x,6.248661263057662,times,derived,,,2022,,,cogs / average_inventory
+2022,ap_payment_days,95.33550343676127,days,derived,,,2022,,,average_AP / cogs * 365
+2022,effective_tax_rate_pct,22.180580309359314,percent,derived,,,2022,,,tax / PBT
+2022,dividend_payout_pct,85.34862187496036,percent,derived,,,2022,,,next-period ordinary cash dividend / net_income
+2023,sales_growth_pct,-13.369282629483726,percent,derived,,,2023,,,revenue_t / revenue_t-1 - 1
+2023,cogs_to_sales_pct,80.25953634726794,percent,derived,,,2023,,,cogs / revenue
+2023,gross_margin_pct,19.740463652732064,percent,derived,,,2023,,,gross_profit / revenue
+2023,opex_to_sales_pct,10.839831209263883,percent,derived,,,2023,,,opex / revenue
+2023,operating_margin_pct,8.900632443468183,percent,derived,,,2023,,,operating_income / revenue
+2023,days_sales_in_cash,113.09203190719072,days,derived,,,2023,,,ending_cash / revenue * 365
+2023,ar_collection_days,131.66729000532854,days,derived,,,2023,,,average_AR / revenue * 365
+2023,inventory_turnover_x,6.379046174912716,times,derived,,,2023,,,cogs / average_inventory
+2023,ap_payment_days,100.25902101768966,days,derived,,,2023,,,average_AP / cogs * 365
+2023,effective_tax_rate_pct,46.87190505224514,percent,derived,,,2023,,,tax / PBT
+2023,dividend_payout_pct,132.3723183979306,percent,derived,,,2023,,,next-period ordinary cash dividend / net_income
+2024,sales_growth_pct,44.16729672301336,percent,derived,,,2024,,,revenue_t / revenue_t-1 - 1
+2024,cogs_to_sales_pct,76.84675076423602,percent,derived,,,2024,,,cogs / revenue
+2024,gross_margin_pct,23.15324923576397,percent,derived,,,2024,,,gross_profit / revenue
+2024,opex_to_sales_pct,8.711079228059301,percent,derived,,,2024,,,opex / revenue
+2024,operating_margin_pct,14.442170007704668,percent,derived,,,2024,,,operating_income / revenue
+2024,days_sales_in_cash,99.3566913049933,days,derived,,,2024,,,ending_cash / revenue * 365
+2024,ar_collection_days,115.712566846948,days,derived,,,2024,,,average_AR / revenue * 365
+2024,inventory_turnover_x,6.753103511323023,times,derived,,,2024,,,cogs / average_inventory
+2024,ap_payment_days,95.59012200550606,days,derived,,,2024,,,average_AP / cogs * 365
+2024,effective_tax_rate_pct,22.893717910229466,percent,derived,,,2024,,,tax / PBT
+2024,dividend_payout_pct,68.99946551332224,percent,derived,,,2024,,,next-period ordinary cash dividend / net_income
+2025,sales_growth_pct,31.511383080285693,percent,derived,,,2025,,,revenue_t / revenue_t-1 - 1
+2025,cogs_to_sales_pct,77.26519586944531,percent,derived,,,2025,,,cogs / revenue
+2025,gross_margin_pct,22.734804130554693,percent,derived,,,2025,,,gross_profit / revenue
+2025,opex_to_sales_pct,8.418306582002414,percent,derived,,,2025,,,opex / revenue
+2025,operating_margin_pct,14.316497548552276,percent,derived,,,2025,,,operating_income / revenue
+2025,days_sales_in_cash,62.135631777407134,days,derived,,,2025,,,ending_cash / revenue * 365
+2025,ar_collection_days,129.81904012938594,days,derived,,,2025,,,average_AR / revenue * 365
+2025,inventory_turnover_x,4.425618604087437,times,derived,,,2025,,,cogs / average_inventory
+2025,ap_payment_days,123.14696843443187,days,derived,,,2025,,,average_AP / cogs * 365
+2025,effective_tax_rate_pct,24.553181375165646,percent,derived,,,2025,,,tax / PBT
+2025,dividend_payout_pct,63.5935830320118,percent,derived,,,2025,,,next-period ordinary cash dividend / net_income

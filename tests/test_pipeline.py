@@ -7,6 +7,7 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
+import build_assignment_financials
 import fetch_raw
 import pipeline
 
@@ -81,6 +82,42 @@ def test_dynamic_cutoff_helpers():
     assert fetch_raw.previous_month(2026, 10) == (2026, 9)
     assert fetch_raw.parse_as_of("2026-09") == (2026, 9)
     assert pipeline.parse_forecast_end("2028-12") == pd.Timestamp("2028-12-01")
+
+
+def test_assignment_history_comes_from_official_mops_and_reconciles():
+    history = pd.read_csv(
+        ROOT / "data" / "processed" / "TUC_6274_assignment_historical_2016_2025.csv"
+    )
+    provenance = pd.read_csv(
+        ROOT / "data" / "processed" / "TUC_6274_assignment_provenance.csv"
+    )
+    reconciliation = pd.read_csv(
+        ROOT / "data" / "processed" / "TUC_6274_assignment_reconciliation.csv"
+    )
+
+    assert history["year"].tolist() == list(range(2016, 2026))
+    assert abs(history.loc[history["year"].eq(2024), "revenue_ntd_m"].iloc[0] - 23070.425) < 1e-6
+    assert abs(history.loc[history["year"].eq(2025), "revenue_ntd_m"].iloc[0] - 30340.235) < 1e-6
+    assert abs(history.loc[history["year"].eq(2025), "cash_dividend_ntd_m"].iloc[0] - 2168.0) < 1e-6
+    assert reconciliation["passed"].all()
+
+    reported = provenance.loc[
+        provenance["statement"].isin(["income", "balance", "statement_of_changes_in_equity"])
+    ]
+    assert not reported.empty
+    assert reported["source_url"].str.startswith(
+        "https://mopsov.twse.com.tw/server-java/t164sb01"
+    ).all()
+    assert reported["source_file"].str.startswith("data/raw/mops_financials/").all()
+
+
+def test_assignment_financial_parser_rebuilds_known_year():
+    path = build_assignment_financials.raw_path(2024, 4)
+    tables = build_assignment_financials.parse_tables(path)
+    row, provenance = build_assignment_financials.build_year(2024, tables, path)
+    assert abs(row["revenue_ntd_m"] - 23070.425) < 1e-6
+    assert abs(row["total_assets_ntd_m"] - 25877.883) < 1e-6
+    assert any(p["field"] == "revenue_ntd_m" for p in provenance)
 
 
 def test_feature_vector_is_finite():
