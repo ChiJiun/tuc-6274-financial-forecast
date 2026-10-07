@@ -29,6 +29,17 @@ FIGURES = REPORTS / "figures"
 TICKER = "6274"
 MODEL_START = pd.Timestamp("2013-01-01")
 DEFAULT_FORECAST_END = pd.Timestamp("2028-12-01")
+SELECTION_HORIZON_MONTHS = 12
+SELECTION_ORIGIN_START = pd.Timestamp("2020-12-01")
+SELECTION_MODEL_NAMES = [
+    "SeasonalNaive",
+    "HW_Damped_Mul",
+    "HW_Damped_Add",
+    "HW_Log_Damped_Add",
+    "Ridge",
+    "GradientBoosting",
+    "RandomForest",
+]
 
 
 @dataclass
@@ -295,16 +306,48 @@ def seasonal_naive(history: np.ndarray, horizon: int) -> np.ndarray:
     return np.asarray(out)
 
 
+def ets_forecast(history: np.ndarray, horizon: int, model_name: str) -> np.ndarray:
+    history = np.asarray(history, dtype=float)
+
+    if model_name == "HW_Damped_Mul":
+        fit = ExponentialSmoothing(
+            history,
+            trend="add",
+            damped_trend=True,
+            seasonal="mul",
+            seasonal_periods=12,
+            initialization_method="estimated",
+        ).fit(optimized=True, use_brute=True)
+        return np.asarray(fit.forecast(horizon), dtype=float)
+
+    if model_name == "HW_Damped_Add":
+        fit = ExponentialSmoothing(
+            history,
+            trend="add",
+            damped_trend=True,
+            seasonal="add",
+            seasonal_periods=12,
+            initialization_method="estimated",
+        ).fit(optimized=True, use_brute=True)
+        return np.asarray(fit.forecast(horizon), dtype=float)
+
+    if model_name == "HW_Log_Damped_Add":
+        fit = ExponentialSmoothing(
+            np.log(history),
+            trend="add",
+            damped_trend=True,
+            seasonal="add",
+            seasonal_periods=12,
+            initialization_method="estimated",
+        ).fit(optimized=True, use_brute=True)
+        return np.exp(np.asarray(fit.forecast(horizon), dtype=float))
+
+    raise ValueError(model_name)
+
+
 def hw_damped_forecast(history: np.ndarray, horizon: int) -> np.ndarray:
-    fit = ExponentialSmoothing(
-        np.asarray(history, dtype=float),
-        trend="add",
-        damped_trend=True,
-        seasonal="mul",
-        seasonal_periods=12,
-        initialization_method="estimated",
-    ).fit(optimized=True, use_brute=True)
-    return np.asarray(fit.forecast(horizon), dtype=float)
+    """Backward-compatible alias for the previous production specification."""
+    return ets_forecast(history, horizon, "HW_Damped_Mul")
 
 
 def evaluate(actual: np.ndarray, pred: np.ndarray) -> tuple[float, float, float]:
@@ -314,7 +357,9 @@ def evaluate(actual: np.ndarray, pred: np.ndarray) -> tuple[float, float, float]
     return mape, wape, total_error
 
 
-def backtest(model_df: pd.DataFrame):
+def backtest(model_df: pd.DataFrame, model_names: list[str] | None = None):
+    """Annual-origin diagnostic/stress test; never used for production selection."""
+    model_names = model_names or SELECTION_MODEL_NAMES
     y = model_df["revenue_bn_twd"].to_numpy(dtype=float)
     dates = model_df["date"].tolist()
     first_history_month = int(model_df.iloc[0]["month"])
@@ -332,17 +377,8 @@ def backtest(model_df: pd.DataFrame):
             continue
 
         preds = {
-            "SeasonalNaive": seasonal_naive(history, horizon),
-            "HW_Damped": hw_damped_forecast(history, horizon),
-            "Ridge": recursive_ml_forecast(
-                history, first_history_month, horizon, "Ridge"
-            ),
-            "GradientBoosting": recursive_ml_forecast(
-                history, first_history_month, horizon, "GradientBoosting"
-            ),
-            "RandomForest": recursive_ml_forecast(
-                history, first_history_month, horizon, "RandomForest"
-            ),
+            name: forecast_model(name, history, first_history_month, horizon)
+            for name in model_names
         }
 
         for name, pred in preds.items():
@@ -361,11 +397,20 @@ def backtest(model_df: pd.DataFrame):
             )
 
     bt = pd.DataFrame(rows)
+    bt["is_complete_12m"] = bt["forecast_months"].eq(12)
+    bt["selection_eligible"] = False
     bt.to_csv(
         RESULTS / "walk_forward_backtest.csv",
         index=False,
         encoding="utf-8-sig",
     )
+    partial = bt.loc[bt["forecast_months"].lt(12)].copy()
+    partial.to_csv(
+        RESULTS / "partial_year_stress_test.csv",
+        index=False,
+        encoding="utf-8-sig",
+    )
+
     summary = (
         bt.assign(abs_total_error=lambda x: x["total_error_pct"].abs())
         .groupby("model", as_index=False)
@@ -377,13 +422,89 @@ def backtest(model_df: pd.DataFrame):
         .sort_values("mean_WAPE_pct")
         .reset_index(drop=True)
     )
+    summary.to_csv(
+        RESULTS / "annual_backtest_summary.csv", index=False, encoding="utf-8-sig"
+    )
+    return bt, summary
+
+
+def rolling_selection_backtest(model_df: pd.DataFrame):
+    """Equal-horizon quarterly rolling-origin validation used for production selection."""
+    y = model_df["revenue_bn_twd"].to_numpy(dtype=float)
+    dates = model_df["date"].reset_index(drop=True)
+    first_history_month = int(model_df.iloc[0]["month"])
+    rows = []
+
+    for i, origin in enumerate(dates):
+        if origin.month not in (3, 6, 9, 12):
+            continue
+        if origin < SELECTION_ORIGIN_START:
+            continue
+
+        end = i + 1
+        if end + SELECTION_HORIZON_MONTHS > len(model_df):
+            continue
+
+        history = y[:end]
+        actual = y[end : end + SELECTION_HORIZON_MONTHS]
+
+        for name in SELECTION_MODEL_NAMES:
+            pred = forecast_model(
+                name,
+                history,
+                first_history_month,
+                SELECTION_HORIZON_MONTHS,
+            )
+            mape, wape, total_error = evaluate(actual, pred)
+            rows.append(
+                {
+                    "origin": origin,
+                    "model": name,
+                    "forecast_months": SELECTION_HORIZON_MONTHS,
+                    "mape_pct": mape * 100,
+                    "wape_pct": wape * 100,
+                    "total_error_pct": total_error * 100,
+                }
+            )
+
+    rolling = pd.DataFrame(rows)
+    if rolling.empty:
+        raise RuntimeError("No equal-horizon rolling-origin folds available.")
+
+    rolling.to_csv(
+        RESULTS / "model_selection_12m_quarterly.csv",
+        index=False,
+        encoding="utf-8-sig",
+    )
+
+    summary = (
+        rolling.assign(abs_total_error=lambda x: x["total_error_pct"].abs())
+        .groupby("model", as_index=False)
+        .agg(
+            mean_MAPE_pct=("mape_pct", "mean"),
+            mean_WAPE_pct=("wape_pct", "mean"),
+            median_WAPE_pct=("wape_pct", "median"),
+            p75_WAPE_pct=("wape_pct", lambda x: x.quantile(0.75)),
+            mean_abs_annual_total_error_pct=("abs_total_error", "mean"),
+            folds=("origin", "count"),
+        )
+        .sort_values(
+            [
+                "mean_WAPE_pct",
+                "median_WAPE_pct",
+                "mean_abs_annual_total_error_pct",
+                "model",
+            ],
+            kind="stable",
+        )
+        .reset_index(drop=True)
+    )
     summary["selected"] = False
-    if not summary.empty:
-        summary.loc[0, "selected"] = True
+    summary.loc[0, "selected"] = True
     summary.to_csv(
         RESULTS / "model_summary.csv", index=False, encoding="utf-8-sig"
     )
-    return bt, summary
+    return rolling, summary
 
 
 def forecast_model(
@@ -394,8 +515,8 @@ def forecast_model(
 ):
     if model_name == "SeasonalNaive":
         return seasonal_naive(history, horizon)
-    if model_name == "HW_Damped":
-        return hw_damped_forecast(history, horizon)
+    if model_name in {"HW_Damped_Mul", "HW_Damped_Add", "HW_Log_Damped_Add"}:
+        return ets_forecast(history, horizon, model_name)
     if model_name in {"Ridge", "GradientBoosting", "RandomForest"}:
         return recursive_ml_forecast(
             history, first_history_month, horizon, model_name
@@ -419,13 +540,7 @@ def build_forecast(
     history = model_df["revenue_bn_twd"].to_numpy(dtype=float)
     first_history_month = int(model_df.iloc[0]["month"])
 
-    model_names = [
-        "SeasonalNaive",
-        "HW_Damped",
-        "Ridge",
-        "GradientBoosting",
-        "RandomForest",
-    ]
+    model_names = SELECTION_MODEL_NAMES
     out = pd.DataFrame({"date": future_dates})
     for name in model_names:
         out[name] = forecast_model(
@@ -505,7 +620,7 @@ def plot_outputs(
     ordered = summary.sort_values("mean_WAPE_pct")
     fig, ax = plt.subplots(figsize=(10, 5.5))
     ax.bar(ordered["model"], ordered["mean_WAPE_pct"])
-    ax.set_title("Walk-forward Backtest: Mean WAPE")
+    ax.set_title("12-Month Rolling-Origin Selection: Mean WAPE")
     ax.set_ylabel("Mean WAPE (%) - lower is better")
     ax.tick_params(axis="x", rotation=20)
     fig.tight_layout()
@@ -517,6 +632,7 @@ def write_excel(
     monthly: pd.DataFrame,
     features: pd.DataFrame,
     backtest_df: pd.DataFrame,
+    selection_df: pd.DataFrame,
     summary: pd.DataFrame,
     monthly_fc: pd.DataFrame,
     annual_fc: pd.DataFrame,
@@ -525,7 +641,8 @@ def write_excel(
     with pd.ExcelWriter(path, engine="openpyxl") as writer:
         monthly.to_excel(writer, sheet_name="Monthly_RawParsed", index=False)
         features.to_excel(writer, sheet_name="Features", index=False)
-        backtest_df.to_excel(writer, sheet_name="Backtest", index=False)
+        backtest_df.to_excel(writer, sheet_name="Annual_Backtest", index=False)
+        selection_df.to_excel(writer, sheet_name="Selection_12M_Rolling", index=False)
         summary.to_excel(writer, sheet_name="Model_Summary", index=False)
         monthly_fc.to_excel(writer, sheet_name="Forecast_Monthly", index=False)
         annual_fc.to_excel(writer, sheet_name="Forecast_Annual", index=False)
@@ -549,7 +666,9 @@ def write_methodology(
         "",
         "## Validation",
         "",
-        "Expanding walk-forward validation. No random train/test split.",
+        "Production model selection uses equal-horizon 12-month forecasts from quarterly",
+        "rolling origins beginning 2020-12. Selection metric: mean out-of-sample WAPE.",
+        "Partial-year 2026 performance is retained only in the annual-origin stress test.",
         "",
         "## Annual forecast",
         "",
@@ -587,6 +706,7 @@ def parse_forecast_end(value: str) -> pd.Timestamp:
 def write_run_metadata(
     model_df: pd.DataFrame,
     annual_fc: pd.DataFrame,
+    selection_summary: pd.DataFrame,
     selected: str,
     forecast_end: pd.Timestamp,
 ):
@@ -598,6 +718,17 @@ def write_run_metadata(
         "observations": int(len(model_df)),
         "forecast_end": forecast_end.strftime("%Y-%m"),
         "selected_model": selected,
+        "selection_protocol": "quarterly rolling-origin, fixed 12-month horizon",
+        "selection_metric": "mean_WAPE_pct",
+        "selection_tiebreakers": [
+            "median_WAPE_pct",
+            "mean_abs_annual_total_error_pct",
+            "model",
+        ],
+        "selection_origin_start": SELECTION_ORIGIN_START.strftime("%Y-%m"),
+        "selection_horizon_months": SELECTION_HORIZON_MONTHS,
+        "selection_folds": int(selection_summary.iloc[0]["folds"]),
+        "selection_score": float(selection_summary.iloc[0]["mean_WAPE_pct"]),
         "forecast_years": [int(y) for y in annual_fc["year"].tolist()],
     }
     (RESULTS / "run_metadata.json").write_text(
@@ -634,16 +765,33 @@ def main():
         )
 
     features = make_feature_frame(model_df)
-    bt, summary = backtest(model_df)
+    selection_bt, summary = rolling_selection_backtest(model_df)
+    selected_for_stress = str(summary.iloc[0]["model"])
+    stress_models = [selected_for_stress]
+    if selected_for_stress != "SeasonalNaive":
+        stress_models.append("SeasonalNaive")
+    annual_bt, _annual_summary = backtest(model_df, model_names=stress_models)
     monthly_fc, annual_fc, selected = build_forecast(
         model_df, summary, forecast_end=args.forecast_end
     )
     plot_outputs(model_df, monthly_fc, summary, selected)
     write_excel(
-        monthly_all, features, bt, summary, monthly_fc, annual_fc
+        monthly_all,
+        features,
+        annual_bt,
+        selection_bt,
+        summary,
+        monthly_fc,
+        annual_fc,
     )
     write_methodology(monthly_all, summary, annual_fc, selected)
-    write_run_metadata(model_df, annual_fc, selected, args.forecast_end)
+    write_run_metadata(
+        model_df,
+        annual_fc,
+        summary,
+        selected,
+        args.forecast_end,
+    )
 
     print("\nSelected model:", selected)
     print(summary.to_string(index=False))

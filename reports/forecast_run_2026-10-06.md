@@ -1,5 +1,7 @@
 # 台燿科技（6274）Revenue Forecast — Completed Run
 
+> Historical snapshot. Production model selection was updated on 2026-10-07; see `model_selection_2026-10-07.md`.
+
 ## Scope
 
 - Company: 台燿科技（TUC, 6274）

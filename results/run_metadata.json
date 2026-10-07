@@ -1,11 +1,22 @@
 {
-  "generated_at_utc": "2026-10-07T13:27:58.495178+00:00",
+  "generated_at_utc": "2026-10-07T13:56:19.320236+00:00",
   "ticker": "6274",
   "model_start": "2013-01",
   "actual_data_through": "2026-09",
   "observations": 165,
   "forecast_end": "2028-12",
-  "selected_model": "HW_Damped",
+  "selected_model": "HW_Damped_Add",
+  "selection_protocol": "quarterly rolling-origin, fixed 12-month horizon",
+  "selection_metric": "mean_WAPE_pct",
+  "selection_tiebreakers": [
+    "median_WAPE_pct",
+    "mean_abs_annual_total_error_pct",
+    "model"
+  ],
+  "selection_origin_start": "2020-12",
+  "selection_horizon_months": 12,
+  "selection_folds": 20,
+  "selection_score": 17.757179643690584,
   "forecast_years": [
     2026,
     2027,

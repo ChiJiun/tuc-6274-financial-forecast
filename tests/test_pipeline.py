@@ -61,13 +61,14 @@ def test_model_outputs_are_within_reference_tolerance():
 
     selected = summary.loc[summary["selected"].astype(str).str.lower().eq("true")]
     assert len(selected) == 1
-    assert selected.iloc[0]["model"] == "HW_Damped"
-    assert abs(float(selected.iloc[0]["mean_WAPE_pct"]) - 19.99) < 0.5
+    assert selected.iloc[0]["model"] == "HW_Damped_Add"
+    assert abs(float(selected.iloc[0]["mean_WAPE_pct"]) - 17.76) < 0.5
+    assert int(selected.iloc[0]["folds"]) >= 15
 
     expected = {
-        2026: 61.71,
-        2027: 104.65,
-        2028: 144.41,
+        2026: 62.59,
+        2027: 109.36,
+        2028: 152.25,
     }
     actual = annual.set_index("year")["selected_revenue_bn_twd"].to_dict()
     for year, reference in expected.items():

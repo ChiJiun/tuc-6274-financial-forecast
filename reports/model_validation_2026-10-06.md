@@ -1,5 +1,7 @@
 # Model Validation — 2026-10-06
 
+> Historical snapshot. Production model selection was updated on 2026-10-07; see `model_selection_2026-10-07.md`.
+
 ## Data
 
 - Source: MOPS OTC historical monthly revenue files under `data/raw/mops_monthly/`
