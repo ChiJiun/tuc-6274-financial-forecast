@@ -1,8 +1,11 @@
 from __future__ import annotations
 
+import argparse
+import json
 import math
 import re
 from dataclasses import dataclass
+from datetime import datetime, timezone
 from io import StringIO
 from pathlib import Path
 
@@ -25,7 +28,7 @@ FIGURES = REPORTS / "figures"
 
 TICKER = "6274"
 MODEL_START = pd.Timestamp("2013-01-01")
-FORECAST_END = pd.Timestamp("2028-12-01")
+DEFAULT_FORECAST_END = pd.Timestamp("2028-12-01")
 
 
 @dataclass
@@ -400,11 +403,17 @@ def forecast_model(
     raise ValueError(model_name)
 
 
-def build_forecast(model_df: pd.DataFrame, summary: pd.DataFrame):
+def build_forecast(
+    model_df: pd.DataFrame,
+    summary: pd.DataFrame,
+    forecast_end: pd.Timestamp = DEFAULT_FORECAST_END,
+):
     selected = str(summary.iloc[0]["model"])
     last_date = model_df["date"].max()
+    if forecast_end <= last_date:
+        raise ValueError("forecast_end must be after the latest observed month")
     future_dates = pd.date_range(
-        last_date + pd.offsets.MonthBegin(1), FORECAST_END, freq="MS"
+        last_date + pd.offsets.MonthBegin(1), forecast_end, freq="MS"
     )
     horizon = len(future_dates)
     history = model_df["revenue_bn_twd"].to_numpy(dtype=float)
@@ -568,7 +577,45 @@ def write_methodology(
     )
 
 
+def parse_forecast_end(value: str) -> pd.Timestamp:
+    try:
+        return pd.Timestamp(datetime.strptime(value, "%Y-%m").date().replace(day=1))
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError("--forecast-end must be YYYY-MM") from exc
+
+
+def write_run_metadata(
+    model_df: pd.DataFrame,
+    annual_fc: pd.DataFrame,
+    selected: str,
+    forecast_end: pd.Timestamp,
+):
+    payload = {
+        "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+        "ticker": TICKER,
+        "model_start": MODEL_START.strftime("%Y-%m"),
+        "actual_data_through": model_df["date"].max().strftime("%Y-%m"),
+        "observations": int(len(model_df)),
+        "forecast_end": forecast_end.strftime("%Y-%m"),
+        "selected_model": selected,
+        "forecast_years": [int(y) for y in annual_fc["year"].tolist()],
+    }
+    (RESULTS / "run_metadata.json").write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--forecast-end",
+        type=parse_forecast_end,
+        default=DEFAULT_FORECAST_END,
+        help="Last forecast month in YYYY-MM format (default: 2028-12).",
+    )
+    args = parser.parse_args()
+
     ensure_dirs()
     monthly_all = build_monthly_dataset()
     model_df = (
@@ -588,12 +635,15 @@ def main():
 
     features = make_feature_frame(model_df)
     bt, summary = backtest(model_df)
-    monthly_fc, annual_fc, selected = build_forecast(model_df, summary)
+    monthly_fc, annual_fc, selected = build_forecast(
+        model_df, summary, forecast_end=args.forecast_end
+    )
     plot_outputs(model_df, monthly_fc, summary, selected)
     write_excel(
         monthly_all, features, bt, summary, monthly_fc, annual_fc
     )
     write_methodology(monthly_all, summary, annual_fc, selected)
+    write_run_metadata(model_df, annual_fc, selected, args.forecast_end)
 
     print("\nSelected model:", selected)
     print(summary.to_string(index=False))
