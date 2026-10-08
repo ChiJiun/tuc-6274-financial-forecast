@@ -8,6 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 import build_assignment_financials
+import build_scenarios
 import fetch_raw
 import pipeline
 
@@ -118,6 +119,43 @@ def test_assignment_financial_parser_rebuilds_known_year():
     assert abs(row["revenue_ntd_m"] - 23070.425) < 1e-6
     assert abs(row["total_assets_ntd_m"] - 25877.883) < 1e-6
     assert any(p["field"] == "revenue_ntd_m" for p in provenance)
+
+
+def test_uncertainty_and_business_scenarios_are_separate_and_consistent():
+    uncertainty = pd.read_csv(ROOT / "results" / "forecast_uncertainty.csv")
+    scenarios = pd.read_csv(ROOT / "results" / "pro_forma_revenue_scenarios.csv")
+    sensitivity = pd.read_csv(
+        ROOT / "results" / "pro_forma_growth_margin_sensitivity.csv"
+    )
+    annual = pd.read_csv(ROOT / "results" / "annual_forecast.csv")
+
+    assert uncertainty["year"].tolist() == [2027, 2028]
+    assert (uncertainty["empirical_80_low_bn_twd"] < uncertainty["point_forecast_bn_twd"]).all()
+    assert (uncertainty["point_forecast_bn_twd"] < uncertainty["empirical_80_high_bn_twd"]).all()
+    assert (uncertainty["calibration_folds"] >= 15).all()
+    assert uncertainty["method"].str.contains("12-month rolling-origin", regex=False).all()
+
+    assert set(scenarios["scenario"]) == {"Downside", "Base", "Upside"}
+    base = scenarios.loc[scenarios["scenario"].eq("Base")].set_index("year")
+    annual = annual.set_index("year")
+    for year in (2027, 2028):
+        assert abs(base.loc[year, "revenue_bn_twd"] - annual.loc[year, "selected_revenue_bn_twd"]) < 1e-6
+
+    assert len(sensitivity) == 18
+    expected_gp = sensitivity["revenue_bn_twd"] * sensitivity["gross_margin_pct"] / 100
+    assert np.allclose(sensitivity["gross_profit_bn_twd"], expected_gp)
+
+
+def test_scenario_builder_uses_latest_official_margin_anchor():
+    annual = pd.read_csv(ROOT / "results" / "annual_forecast.csv")
+    history = pd.read_csv(
+        ROOT / "data" / "processed" / "TUC_6274_assignment_historical_2016_2025.csv"
+    )
+    sensitivity = build_scenarios.build_growth_margin_sensitivity(annual, history)
+    latest = history.sort_values("year").iloc[-1]
+    base_rows = sensitivity.loc[sensitivity["margin_case"].eq("Base")]
+    assert np.allclose(base_rows["gross_margin_pct"], latest["gross_margin_pct"])
+    assert (base_rows["gross_margin_anchor_year"] == int(latest["year"])).all()
 
 
 def test_feature_vector_is_finite():
