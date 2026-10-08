@@ -118,7 +118,7 @@ Windows PowerShell：
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
+pip install -r requirements.lock.txt
 
 python src/fetch_raw.py
 python src/build_assignment_financials.py
