@@ -4,7 +4,9 @@ import argparse
 import json
 import math
 import re
+import sys
 from dataclasses import dataclass
+from importlib import metadata as importlib_metadata
 from datetime import datetime, timezone
 from io import StringIO
 from pathlib import Path
@@ -39,6 +41,19 @@ SELECTION_MODEL_NAMES = [
     "Ridge",
     "GradientBoosting",
     "RandomForest",
+]
+
+RUNTIME_PACKAGE_NAMES = [
+    "numpy",
+    "pandas",
+    "matplotlib",
+    "scikit-learn",
+    "statsmodels",
+    "openpyxl",
+    "requests",
+    "beautifulsoup4",
+    "lxml",
+    "pytest",
 ]
 
 
@@ -712,6 +727,11 @@ def write_run_metadata(
 ):
     payload = {
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+        "python_version": ".".join(str(x) for x in sys.version_info[:3]),
+        "environment_lock": "requirements.lock.txt",
+        "package_versions": {
+            name: importlib_metadata.version(name) for name in RUNTIME_PACKAGE_NAMES
+        },
         "ticker": TICKER,
         "model_start": MODEL_START.strftime("%Y-%m"),
         "actual_data_through": model_df["date"].max().strftime("%Y-%m"),
