@@ -13,8 +13,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12.15"
-          cache: "pip"\n          cache-dependency-path: requirements.lock.txt
-      - run: pip install -r requirements.lock.txt\n      - run: pip check
+          cache: "pip"
+          cache-dependency-path: requirements.lock.txt
+      - run: python --version
+      - run: pip install -r requirements.lock.txt
+      - run: pip check
       - run: python src/build_assignment_financials.py
       - run: python src/pipeline.py --forecast-end 2028-12
       - run: python src/validate_models.py
