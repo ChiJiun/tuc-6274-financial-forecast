@@ -245,7 +245,7 @@ def build_manifest_rows(
             p
             for p in RAW.rglob("*")
             if p.is_file()
-            and p.name != "manifest.csv"
+            and p.name not in {"manifest.csv", "README.md"}
             and not p.name.endswith(".part")
         ]
 
