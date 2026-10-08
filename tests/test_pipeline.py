@@ -85,6 +85,59 @@ def test_dynamic_cutoff_helpers():
     assert pipeline.parse_forecast_end("2028-12") == pd.Timestamp("2028-12-01")
 
 
+def test_manifest_preserves_cached_capture_time_and_records_refresh_event():
+    existing = fetch_raw.read_existing_manifest()
+    rel = "data/raw/mops_monthly/t21sc03_115_9_0.html"
+    path = ROOT / rel
+    assert rel in existing
+
+    cached = fetch_raw.build_manifest_rows(
+        files=[path],
+        existing_rows=existing,
+        download_events={},
+        ir_sources={},
+    )[0]
+    assert cached["captured_at_utc"] == existing[rel]["captured_at_utc"]
+
+    refreshed = fetch_raw.build_manifest_rows(
+        files=[path],
+        existing_rows=existing,
+        download_events={
+            rel: {
+                "captured_at_utc": "2099-01-01T00:00:00+00:00",
+                "source_url": "https://example.test/refreshed",
+            }
+        },
+        ir_sources={},
+    )[0]
+    assert refreshed["captured_at_utc"] == "2099-01-01T00:00:00+00:00"
+    assert refreshed["source_url"] == "https://example.test/refreshed"
+
+
+def test_manifest_checksums_sizes_and_direct_ir_urls():
+    manifest = pd.read_csv(ROOT / "data" / "raw" / "manifest.csv")
+    assert not manifest.empty
+
+    for row in manifest.itertuples(index=False):
+        path = ROOT / row.path
+        assert path.exists(), row.path
+        assert int(row.size_bytes) == path.stat().st_size, row.path
+        assert row.sha256 == fetch_raw.sha256(path), row.path
+
+    ir = manifest.loc[manifest["path"].str.contains("/investor_presentations/")]
+    assert len(ir) > 0
+    assert ir["source_url"].str.contains("/_run.php", regex=False).all()
+
+    financial_html = manifest.loc[
+        manifest["path"].str.contains("/mops_financials/")
+        & manifest["path"].str.endswith(".html")
+    ]
+    assert len(financial_html) >= 10
+    assert financial_html["source_url"].str.contains(
+        "server-java/t164sb01", regex=False
+    ).all()
+
+
 def test_assignment_history_comes_from_official_mops_and_reconciles():
     history = pd.read_csv(
         ROOT / "data" / "processed" / "TUC_6274_assignment_historical_2016_2025.csv"
