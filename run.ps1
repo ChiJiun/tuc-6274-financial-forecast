@@ -4,13 +4,24 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+$venvPython = ".\.venv\Scripts\python.exe"
+$requiredPython = "3.12.15"
 
 if (-not (Test-Path ".venv")) {
-    python -m venv .venv
+    if (Get-Command py -ErrorAction SilentlyContinue) {
+        & py -3.12 -m venv .venv
+    } else {
+        python -m venv .venv
+    }
 }
 
-& $venvPython -m pip install --upgrade pip
-& $venvPython -m pip install -r requirements.txt
+$pythonVersion = & $venvPython -c "import platform; print(platform.python_version())"
+if ($pythonVersion -ne $requiredPython) {
+    throw "Expected Python $requiredPython, found $pythonVersion. Remove .venv, install Python $requiredPython, and rerun."
+}
+
+& $venvPython -m pip install -r requirements.lock.txt
+& $venvPython -m pip check
 
 $fetchArgs = @("src/fetch_raw.py")
 if ($AsOf) { $fetchArgs += @("--as-of", $AsOf) }
