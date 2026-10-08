@@ -1,4 +1,5 @@
 from pathlib import Path
+import json
 import sys
 
 import numpy as np
@@ -217,3 +218,25 @@ def test_feature_vector_is_finite():
     x = pipeline.level_features(vals, 30, months)
     assert len(x) == len(pipeline.FEATURE_NAMES)
     assert pd.notna(x).all()
+
+
+def test_locked_environment_and_metadata():
+    lock_lines = [
+        line.strip()
+        for line in (ROOT / "requirements.lock.txt").read_text(encoding="utf-8").splitlines()
+        if line.strip() and not line.lstrip().startswith("#")
+    ]
+    assert lock_lines
+    assert all("==" in line and ">=" not in line for line in lock_lines)
+    assert (ROOT / ".python-version").read_text(encoding="utf-8").strip() == "3.12.15"
+
+    metadata = json.loads(
+        (ROOT / "results" / "run_metadata.json").read_text(encoding="utf-8")
+    )
+    assert metadata["python_version"] == "3.12.15"
+    assert metadata["environment_lock"] == "requirements.lock.txt"
+    assert set(pipeline.RUNTIME_PACKAGE_NAMES).issubset(metadata["package_versions"])
+    assert all(
+        metadata["package_versions"][name]
+        for name in pipeline.RUNTIME_PACKAGE_NAMES
+    )

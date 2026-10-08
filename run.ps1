@@ -4,20 +4,31 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+$venvPython = ".\.venv\Scripts\python.exe"
+$requiredPython = "3.12.15"
 
 if (-not (Test-Path ".venv")) {
-    python -m venv .venv
+    if (Get-Command py -ErrorAction SilentlyContinue) {
+        & py -3.12 -m venv .venv
+    } else {
+        python -m venv .venv
+    }
 }
 
-& ".\.venv\Scripts\python.exe" -m pip install --upgrade pip
-& ".\.venv\Scripts\python.exe" -m pip install -r requirements.txt
+$pythonVersion = & $venvPython -c "import platform; print(platform.python_version())"
+if ($pythonVersion -ne $requiredPython) {
+    throw "Expected Python $requiredPython, found $pythonVersion. Remove .venv, install Python $requiredPython, and rerun."
+}
+
+& $venvPython -m pip install -r requirements.lock.txt
+& $venvPython -m pip check
 
 $fetchArgs = @("src/fetch_raw.py")
 if ($AsOf) { $fetchArgs += @("--as-of", $AsOf) }
-& ".\.venv\Scripts\python.exe" @fetchArgs
-& ".\.venv\Scripts\python.exe" src/build_assignment_financials.py
+& $venvPython @fetchArgs
+& $venvPython src/build_assignment_financials.py
 
-& ".\.venv\Scripts\python.exe" src/pipeline.py --forecast-end $ForecastEnd
-& ".\.venv\Scripts\python.exe" src/validate_models.py
-& ".\.venv\Scripts\python.exe" src/build_scenarios.py
-& ".\.venv\Scripts\python.exe" -m pytest -q
+& $venvPython src/pipeline.py --forecast-end $ForecastEnd
+& $venvPython src/validate_models.py
+& $venvPython src/build_scenarios.py
+& $venvPython -m pytest -q
