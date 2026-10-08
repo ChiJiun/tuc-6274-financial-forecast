@@ -34,6 +34,10 @@ SESSION.headers.update(
     }
 )
 
+# Files actually downloaded/replaced during the current process.
+# Cached files are intentionally absent so their original manifest timestamp can be preserved.
+DOWNLOAD_EVENTS: dict[str, dict[str, str]] = {}
+
 
 def sha256(path: Path) -> str:
     h = hashlib.sha256()
@@ -52,6 +56,12 @@ def download(url: str, dest: Path, refresh: bool = False, timeout: int = 45) -> 
     r.raise_for_status()
     tmp.write_bytes(r.content)
     tmp.replace(dest)
+
+    rel = dest.relative_to(ROOT).as_posix()
+    DOWNLOAD_EVENTS[rel] = {
+        "source_url": url,
+        "captured_at_utc": datetime.now(timezone.utc).isoformat(),
+    }
     return True
 
 
@@ -163,7 +173,27 @@ def fetch_core_snapshots(refresh: bool = False):
             print("WARN CORE", filename, exc)
 
 
-def infer_source_url(path: Path) -> str:
+def tuc_ir_source_map() -> dict[str, str]:
+    """Map cached TUC IR filenames to their exact attachment download URLs."""
+    ir_html = RAW / "tuc_investor_relations.html"
+    if not ir_html.exists():
+        return {}
+
+    text = ir_html.read_text(encoding="utf-8", errors="replace")
+    soup = BeautifulSoup(text, "html.parser")
+    mapping: dict[str, str] = {}
+    for a in soup.find_all("a", href=True):
+        href = urljoin("https://www.tuc.com.tw", a["href"])
+        if "_run.php" not in href:
+            continue
+        name = safe_filename_from_tuc_link(href)
+        suffix = Path(name).suffix.lower()
+        if suffix in {".pdf", ".ppt", ".pptx", ".zip"}:
+            mapping[name] = href
+    return mapping
+
+
+def infer_source_url(path: Path, ir_sources: dict[str, str] | None = None) -> str:
     rel = path.relative_to(ROOT).as_posix()
     if rel.startswith("data/raw/mops_monthly/"):
         m = re.search(r"t21sc03_(\d+)_(\d+)_0\.html$", path.name)
@@ -172,32 +202,96 @@ def infer_source_url(path: Path) -> str:
                 "https://mopsov.twse.com.tw/nas/t21/otc/"
                 f"t21sc03_{m.group(1)}_{m.group(2)}_0.html"
             )
+
+    if rel.startswith("data/raw/mops_financials/"):
+        m = re.search(r"6274_(\d{4})_Q([1-4])_C\.html$", path.name)
+        if m:
+            return (
+                "https://mopsov.twse.com.tw/server-java/t164sb01"
+                f"?step=1&CO_ID=6274&SYEAR={m.group(1)}"
+                f"&SSEASON={m.group(2)}&REPORT_ID=C"
+            )
+
     if path.name in CORE_SNAPSHOTS:
         return CORE_SNAPSHOTS[path.name]
+
     if path.parent == IR_DIR:
-        return CORE_SNAPSHOTS["tuc_investor_relations.html"]
+        ir_sources = ir_sources or tuc_ir_source_map()
+        return ir_sources.get(path.name, CORE_SNAPSHOTS["tuc_investor_relations.html"])
     return ""
+
+
+def read_existing_manifest() -> dict[str, dict[str, str]]:
+    if not MANIFEST.exists():
+        return {}
+    with MANIFEST.open(newline="", encoding="utf-8-sig") as f:
+        return {row["path"]: row for row in csv.DictReader(f)}
+
+
+def file_mtime_utc(path: Path) -> str:
+    return datetime.fromtimestamp(path.stat().st_mtime, tz=timezone.utc).isoformat()
+
+
+def build_manifest_rows(
+    files: list[Path] | None = None,
+    *,
+    existing_rows: dict[str, dict[str, str]] | None = None,
+    download_events: dict[str, dict[str, str]] | None = None,
+    ir_sources: dict[str, str] | None = None,
+) -> list[dict[str, str | int]]:
+    """Build manifest rows while preserving capture times for unchanged cached files."""
+    if files is None:
+        files = [
+            p
+            for p in RAW.rglob("*")
+            if p.is_file()
+            and p.name not in {"manifest.csv", "README.md"}
+            and not p.name.endswith(".part")
+        ]
+
+    existing_rows = existing_rows if existing_rows is not None else read_existing_manifest()
+    download_events = download_events if download_events is not None else DOWNLOAD_EVENTS
+    ir_sources = ir_sources if ir_sources is not None else tuc_ir_source_map()
+
+    rows: list[dict[str, str | int]] = []
+    for path in sorted(files):
+        rel = path.relative_to(ROOT).as_posix()
+        digest = sha256(path)
+        size = path.stat().st_size
+        existing = existing_rows.get(rel)
+        event = download_events.get(rel)
+
+        if event is not None:
+            captured_at = event["captured_at_utc"]
+            source_url = event["source_url"]
+        else:
+            unchanged = (
+                existing is not None
+                and existing.get("sha256") == digest
+                and str(existing.get("size_bytes", "")) == str(size)
+            )
+            captured_at = (
+                existing["captured_at_utc"]
+                if unchanged and existing.get("captured_at_utc")
+                else file_mtime_utc(path)
+            )
+            source_url = infer_source_url(path, ir_sources)
+
+        rows.append(
+            {
+                "path": rel,
+                "source_url": source_url,
+                "captured_at_utc": captured_at,
+                "sha256": digest,
+                "size_bytes": size,
+            }
+        )
+    return rows
 
 
 def write_manifest():
     RAW.mkdir(parents=True, exist_ok=True)
-    files = [
-        p
-        for p in RAW.rglob("*")
-        if p.is_file() and p.name != "manifest.csv" and not p.name.endswith(".part")
-    ]
-    rows = []
-    now = datetime.now(timezone.utc).isoformat()
-    for p in sorted(files):
-        rows.append(
-            {
-                "path": p.relative_to(ROOT).as_posix(),
-                "source_url": infer_source_url(p),
-                "captured_at_utc": now,
-                "sha256": sha256(p),
-                "size_bytes": p.stat().st_size,
-            }
-        )
+    rows = build_manifest_rows()
     with MANIFEST.open("w", newline="", encoding="utf-8-sig") as f:
         w = csv.DictWriter(
             f,
