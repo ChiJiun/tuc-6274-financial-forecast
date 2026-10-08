@@ -23,6 +23,7 @@
 ├─ src/
 │  ├─ fetch_raw.py
 │  ├─ build_assignment_financials.py
+│  ├─ build_scenarios.py
 │  └─ pipeline.py
 ├─ results/                  # Backtest 與 forecast 結果
 ├─ reports/                  # 結果說明
@@ -95,6 +96,10 @@
 - `results/partial_year_stress_test.csv`
 - `results/monthly_forecast.csv`
 - `results/annual_forecast.csv`
+- `results/forecast_uncertainty.csv`
+- `results/pro_forma_revenue_scenarios.csv`
+- `results/pro_forma_growth_margin_sensitivity.csv`
+- `reports/forecast_uncertainty_and_sensitivity.md`
 - `reports/model_selection_2026-10-07.md`
 - `reports/forecast_run_2026-10-06.md`（historical snapshot）
 - `reports/model_validation_2026-10-06.md`（historical snapshot）
@@ -118,6 +123,8 @@ pip install -r requirements.txt
 python src/fetch_raw.py
 python src/build_assignment_financials.py
 python src/pipeline.py --forecast-end 2028-12
+python src/validate_models.py
+python src/build_scenarios.py
 pytest -q
 ```
 

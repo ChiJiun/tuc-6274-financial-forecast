@@ -1,0 +1,7 @@
+﻿scenario,year,growth_shock_pp,base_model_growth_pct,scenario_growth_pct,revenue_bn_twd,rule
+Downside,2027,-20.0,74.73135506527484,54.73135506527484,96.84358485763718,base model annual growth -20 percentage points; scenario path compounds year to year
+Downside,2028,-20.0,39.21704191315689,19.21704191315689,115.45405714993298,base model annual growth -20 percentage points; scenario path compounds year to year
+Base,2027,0.0,74.73135506527484,74.73135506527484,109.36122678183318,base model annual growth +0 percentage points; scenario path compounds year to year
+Base,2028,0.0,39.21704191315689,39.21704191315689,152.24946492560727,base model annual growth +0 percentage points; scenario path compounds year to year
+Upside,2027,20.0,74.73135506527484,94.73135506527484,121.8788687060292,base model annual growth +20 percentage points; scenario path compounds year to year
+Upside,2028,20.0,39.21704191315689,59.21704191315689,194.05192947095995,base model annual growth +20 percentage points; scenario path compounds year to year
