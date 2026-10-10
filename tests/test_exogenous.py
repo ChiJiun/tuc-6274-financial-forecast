@@ -10,6 +10,8 @@ sys.path.insert(0, str(ROOT / "src"))
 
 import benchmark_exogenous as benchmark
 import build_exogenous_features as exogenous
+import build_exogenous_phase2 as phase2
+import build_quarterly_financials as quarterly
 
 
 def sample_history():
@@ -87,6 +89,71 @@ def test_real_financial_source_and_proxy_policy():
     jun2026 = features.loc[features["origin"].eq("2026-06-01")].iloc[0]
     assert dec2025["financial_year"] == 2024
     assert jun2026["financial_year"] == 2025
+
+
+def test_phase2_quarterly_financials_cover_latest_public_statement():
+    data = pd.read_csv(
+        ROOT / "data" / "processed"
+        / "TUC_6274_quarterly_financial_features_2016_2026Q2.csv"
+    )
+    assert len(data) == 42
+    assert data["financial_period"].iloc[0] == "2016Q1"
+    assert data["financial_period"].iloc[-1] == "2026Q2"
+
+    q2 = data.iloc[-1]
+    assert abs(q2["revenue_ntd_m"] - 24_355.008) < 1e-6
+    assert abs(q2["fin_gross_margin_pct"] - 27.830535) < 1e-5
+    assert q2["ppe_yoy_growth"] > 0.40
+    assert q2["fin_capex_ytd_asset_ratio"] > 0
+
+
+def test_phase2_latest_origin_has_q3_public_data_without_fake_q3_financials():
+    data = pd.read_csv(
+        ROOT / "data" / "processed" / "exogenous_phase2_features.csv",
+        parse_dates=[
+            "origin",
+            "as_of",
+            "peer_available_at",
+            "fx_available_at",
+            "financial_available_at",
+        ],
+    )
+    latest = data.iloc[-1]
+    assert latest["origin"] == pd.Timestamp("2026-09-01")
+    assert latest["financial_period"] == "2026Q2"
+    assert abs(latest["revenue_bn_twd"] - 6.125570) < 1e-6
+    assert latest["emc_2383_revenue_bn_twd"] > 0
+    assert latest["iteq_6213_revenue_bn_twd"] > 0
+    assert latest["ntd_usd"] > 0
+
+    for date_column in (
+        "peer_available_at",
+        "fx_available_at",
+        "financial_available_at",
+    ):
+        known = data[date_column].notna()
+        assert (data.loc[known, date_column] <= data.loc[known, "as_of"]).all()
+
+
+def test_phase2_saved_scorecards_keep_hw_as_holdout_winner():
+    summary = pd.read_csv(
+        ROOT / "results" / "exogenous_phase2_comparison_summary.csv"
+    )
+    for horizon in (1, 3, 6, 12, 24):
+        row = summary.loc[
+            summary["horizon_months"].eq(horizon)
+            & summary["stage"].eq("holdout")
+        ].iloc[0]
+        assert row["best_model"] == "HW_Damped_Add"
+        assert row["best_features"] == "revenue_only"
+        assert row["best_enriched_WAPE_pct"] > row["hw_WAPE_pct"]
+
+    validation_24 = summary.loc[
+        summary["horizon_months"].eq(24)
+        & summary["stage"].eq("validation")
+    ].iloc[0]
+    assert validation_24["best_model"] == "GradientBoosting"
+    assert validation_24["best_features"] == "all"
 
 
 def test_saved_exogenous_outputs_are_consistent():

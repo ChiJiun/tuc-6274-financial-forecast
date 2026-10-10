@@ -17,12 +17,17 @@
 │  ├─ raw/                    # 原始下載資料
 │  │  ├─ mops_monthly/       # MOPS 歷史月營收
 │  │  ├─ mops_financials/    # MOPS 合併財報
+│  │  ├─ exogenous/          # 同業月營收與 CBC FX snapshots
 │  │  ├─ investor_presentations/
 │  │  └─ manifest.csv
 │  └─ processed/             # 清洗後資料
 ├─ src/
 │  ├─ fetch_raw.py
 │  ├─ build_assignment_financials.py
+│  ├─ build_quarterly_financials.py
+│  ├─ build_exogenous_features.py
+│  ├─ build_exogenous_phase2.py
+│  ├─ benchmark_exogenous_phase2.py
 │  ├─ build_scenarios.py
 │  └─ pipeline.py
 ├─ results/                  # Backtest 與 forecast 結果
@@ -173,6 +178,51 @@ pytest -q
 要進一步加入同業、匯率等外部資料，應為每個來源紀錄其實際發布時間、
 歷史可取得版本，並以相同規則再次驗證。無法在起點得知的未來外部變數，
 不可使用事後實際值。
+
+## 外生特徵實驗（Issue #14，Phase 2）
+
+Phase 2 進一步加入：
+
+- 2016Q1–2026Q2 官方 MOPS 季財報
+- Gross Margin、Operating Margin、Inventory、A/R、PP&E、Debt、CFO、CAPEX
+- PP&E / Inventory / A/R YoY growth（擴產與營運資金 proxy）
+- 台光電 2383、聯茂 6213 月營收
+- CBC NTD/USD 月平均匯率
+
+資料截止到 2026-09；2026Q3 月營收、同業營收與 FX 已涵蓋。2026Q3 財報尚未公開，
+因此財務狀態以 2026Q2 為最新，不做 forward-fill 或自行估造 Q3 財報。
+
+12-month comparable-fold 結果：
+
+| Stage | Best model | Features | Mean WAPE |
+|---|---|---|---:|
+| Validation | HW_Damped_Add | revenue only | 15.17% |
+| Validation best enriched | GradientBoosting | all | 16.16% |
+| Later holdout | HW_Damped_Add | revenue only | 21.64% |
+| Later holdout best enriched | Ridge | peer + FX | 27.24% |
+
+1、3、6、12 個月 holdout 都是 Holt-Winters 最佳；24 個月 validation 曾由
+GradientBoosting + all features 勝出，但在 later holdout 仍輸給 Holt-Winters。
+因此 **production model 維持 HW_Damped_Add**，外生模型作為 robustness / explanatory check。
+
+主要產出：
+
+- `data/processed/TUC_6274_quarterly_financial_features_2016_2026Q2.csv`
+- `data/processed/exogenous_phase2_features.csv`
+- `data/processed/exogenous_phase2_coverage.csv`
+- `results/exogenous_phase2_model_scores.csv`
+- `results/exogenous_phase2_comparison_summary.csv`
+- `results/exogenous_phase2_current_forecast.csv`
+- `reports/exogenous_phase2_report.md`
+- `reports/data_completeness_2026Q3.md`
+
+重建資料：
+
+```powershell
+python src/build_quarterly_financials.py
+python src/build_exogenous_phase2.py
+python src/benchmark_exogenous_phase2.py --horizons 1 3 6 12 24
+```
 
 ## License
 
