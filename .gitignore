@@ -11,6 +11,3 @@ Thumbs.db
 # Keep downloaded raw data and generated research outputs under version control.
 # Temporary partial downloads are ignored.
 *.part
-
-# Licensed/private TEJ exports: keep raw files local and out of the public repo.
-data/private/tej/
