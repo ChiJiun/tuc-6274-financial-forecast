@@ -229,28 +229,6 @@ python src/build_exogenous_phase2.py
 python src/report_tuc_financial_only.py
 ```
 
-## TEJ 匯入
-
-TEJ 原始匯出檔屬授權資料，預設放在 `data/private/tej/`，該目錄不進 Git。
-
-支援 CSV / XLSX / XLS：
-
-```powershell
-python src/import_tej_tuc.py --input "data/private/tej/TUC_6274.xlsx"
-```
-
-若 TEJ 欄名無法自動辨識，可用 JSON 指定欄位對應：
-
-```powershell
-python src/import_tej_tuc.py `
-  --input "data/private/tej/TUC_6274.xlsx" `
-  --column-map "config/tej_tuc_column_map.json"
-```
-
-優先匯出欄位：股票代碼、財報期間、實際公告日、Revenue、Gross Margin、
-Operating Margin、Inventory、A/R、PP&E、CFO、CAPEX、Cash、Assets、Liabilities。
-其中實際公告日最重要，可取代目前 backtest 的 conservative availability proxy。
-
 ## License
 
 程式碼採 MIT License。
