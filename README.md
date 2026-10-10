@@ -179,50 +179,77 @@ pytest -q
 歷史可取得版本，並以相同規則再次驗證。無法在起點得知的未來外部變數，
 不可使用事後實際值。
 
-## 外生特徵實驗（Issue #14，Phase 2）
+## Issue #14：台燿自身財報資訊是否改善營收預測
 
-Phase 2 進一步加入：
+核心比較只使用 **台燿自己的資料**：
 
-- 2016Q1–2026Q2 官方 MOPS 季財報
-- Gross Margin、Operating Margin、Inventory、A/R、PP&E、Debt、CFO、CAPEX
-- PP&E / Inventory / A/R YoY growth（擴產與營運資金 proxy）
-- 台光電 2383、聯茂 6213 月營收
-- CBC NTD/USD 月平均匯率
+- Revenue-only
+- Revenue + TUC quarterly financials
 
-資料截止到 2026-09；2026Q3 月營收、同業營收與 FX 已涵蓋。2026Q3 財報尚未公開，
-因此財務狀態以 2026Q2 為最新，不做 forward-fill 或自行估造 Q3 財報。
+財報範圍為 2016Q1–2026Q2，包含 Gross Margin、Operating Margin、Inventory、A/R、
+PP&E、Debt、CFO、CAPEX，以及 PP&E / Inventory / A/R YoY growth。
+
+資料截止到 2026-09；2026Q3 月營收已涵蓋。2026Q3 財報尚未公開，因此最新財務狀態
+是 2026Q2，不做 forward-fill 或自行估造 Q3 財報。
 
 12-month comparable-fold 結果：
 
-| Stage | Best model | Features | Mean WAPE |
-|---|---|---|---:|
-| Validation | HW_Damped_Add | revenue only | 15.17% |
-| Validation best enriched | GradientBoosting | all | 16.16% |
-| Later holdout | HW_Damped_Add | revenue only | 21.64% |
-| Later holdout best enriched | Ridge | peer + FX | 27.24% |
+| Stage | Model | Revenue-only WAPE | + TUC financials WAPE |
+|---|---|---:|---:|
+| Validation | GradientBoosting | 18.26% | **16.30%** |
+| Validation | Ridge | 19.58% | **16.68%** |
+| Later holdout | GradientBoosting | 29.58% | 29.49% |
+| Later holdout | Ridge | **31.60%** | 31.66% |
+| Later holdout | HW_Damped_Add | **21.64%** | — |
 
-1、3、6、12 個月 holdout 都是 Holt-Winters 最佳；24 個月 validation 曾由
-GradientBoosting + all features 勝出，但在 later holdout 仍輸給 Holt-Winters。
-因此 **production model 維持 HW_Damped_Add**，外生模型作為 robustness / explanatory check。
+財報資訊會改善部分 ML model 的 validation 表現，但在 later holdout 沒有穩定改善，
+也沒有打敗 HW_Damped_Add，因此 **production model 維持 HW_Damped_Add**。
 
-主要產出：
+專門回答這個問題的產出：
+
+- `results/tuc_financial_only_comparison.csv`
+- `reports/tuc_financial_only_comparison.md`
+
+Phase 2 另外保留台光電 2383、聯茂 6213 與 CBC NTD/USD 作為額外 robustness experiment；
+這些外部資料不屬於上述核心比較。
+
+主要 Phase 2 產出：
 
 - `data/processed/TUC_6274_quarterly_financial_features_2016_2026Q2.csv`
 - `data/processed/exogenous_phase2_features.csv`
-- `data/processed/exogenous_phase2_coverage.csv`
 - `results/exogenous_phase2_model_scores.csv`
-- `results/exogenous_phase2_comparison_summary.csv`
-- `results/exogenous_phase2_current_forecast.csv`
 - `reports/exogenous_phase2_report.md`
 - `reports/data_completeness_2026Q3.md`
 
-重建資料：
+重建與產生比較表：
 
 ```powershell
 python src/build_quarterly_financials.py
 python src/build_exogenous_phase2.py
-python src/benchmark_exogenous_phase2.py --horizons 1 3 6 12 24
+python src/report_tuc_financial_only.py
 ```
+
+## TEJ 匯入
+
+TEJ 原始匯出檔屬授權資料，預設放在 `data/private/tej/`，該目錄不進 Git。
+
+支援 CSV / XLSX / XLS：
+
+```powershell
+python src/import_tej_tuc.py --input "data/private/tej/TUC_6274.xlsx"
+```
+
+若 TEJ 欄名無法自動辨識，可用 JSON 指定欄位對應：
+
+```powershell
+python src/import_tej_tuc.py `
+  --input "data/private/tej/TUC_6274.xlsx" `
+  --column-map "config/tej_tuc_column_map.json"
+```
+
+優先匯出欄位：股票代碼、財報期間、實際公告日、Revenue、Gross Margin、
+Operating Margin、Inventory、A/R、PP&E、CFO、CAPEX、Cash、Assets、Liabilities。
+其中實際公告日最重要，可取代目前 backtest 的 conservative availability proxy。
 
 ## License
 
