@@ -134,6 +134,46 @@ pytest -q
 .\.venv\Scripts\python.exe src/pipeline.py
 ```
 
+## 外生財務特徵實驗（Issue #14，第一階段）
+
+此實驗**不修改正式營收預測模型**。新增 `src/build_exogenous_features.py` 與
+`src/benchmark_exogenous.py`，檢驗「月營收」與「月營收＋已公布的年度財務資訊」
+在相同 rolling-origin 測試期間的差異。
+
+資料：現有 MOPS 月營收（2013/01–2026/09）與正式重建的 MOPS 年度合併財報
+（2016–2025）。財務特徵包括毛利率、營業利益率、存貨／總資產、
+PP&E／總資產、應收帳款／總資產。尚**未**加入同業月營收、匯率及產業資料。
+
+為避免將期末資料當成當時已公布資訊，財報採用**下一年 7 月 1 日**
+作為保守的**可用日期代理值**；月營收預測起點以該月結束後下一個月 16 日
+作為代理值。這些日期**不是逐筆查證的歷史公告日期**；要宣稱嚴格歷史
+point-in-time 評估仍需補上原始公告時間及修正版本的檢核。
+未來月份的財務數值不會餵進模型。
+
+使用相同季度起點、固定預測長度（1、3、6、12 個月）與已觀察的目標：
+早期（至 2023/09）作為 model-selection validation，後期（自 2023/12）
+為此新實驗保留的 holdout。但舊有 Holt-Winters 的選模早已用過全部 20 個
+12-month folds，**不可把該 holdout 視為原 Holt-Winters 的全新獨立測試集**。
+
+執行（需先產生既有 `data/processed/` 輸入）：
+
+```powershell
+python src/build_exogenous_features.py
+python src/benchmark_exogenous.py
+pytest -q
+```
+
+產出：
+- `data/processed/exogenous_financial_releases.csv` — 年度財報來源及可用日期**代理值**
+- `data/processed/exogenous_financial_features.csv` — 每月 point-in-time snapshots
+- `results/exogenous_fold_predictions.csv` — 每個季度起點／目標月份的預測和實際值
+- `results/exogenous_model_scores.csv` — 各模型、特徵組合、預測長度的表現
+- `reports/exogenous_financial_ablation.md` — 比較結果與限制
+
+要進一步加入同業、匯率等外部資料，應為每個來源紀錄其實際發布時間、
+歷史可取得版本，並以相同規則再次驗證。無法在起點得知的未來外部變數，
+不可使用事後實際值。
+
 ## License
 
 程式碼採 MIT License。
