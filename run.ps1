@@ -33,4 +33,5 @@ if ($AsOf) { $fetchArgs += @("--as-of", $AsOf) }
 & $venvPython src/build_scenarios.py
 & $venvPython src/build_quarterly_financials.py
 & $venvPython src/build_exogenous_phase2.py
+& $venvPython src/report_tuc_financial_only.py
 & $venvPython -m pytest -q

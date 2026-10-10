@@ -26,4 +26,5 @@ jobs:
       - run: python src/benchmark_exogenous.py
       - run: python src/build_quarterly_financials.py
       - run: python src/build_exogenous_phase2.py
+      - run: python src/report_tuc_financial_only.py
       - run: pytest -q
