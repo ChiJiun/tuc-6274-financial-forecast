@@ -1,0 +1,9 @@
+﻿series,first_period,last_period,observations,missing
+revenue_bn_twd,2013-01,2026-09,165,0
+emc_2383_revenue_bn_twd,2013-01,2026-09,165,0
+iteq_6213_revenue_bn_twd,2013-01,2026-09,165,0
+ntd_usd,2013-01,2026-09,165,0
+fin_gross_margin_pct,2016-05,2026-09,125,40
+fin_ppe_asset_ratio,2016-05,2026-09,125,40
+fin_capex_ytd_asset_ratio,2016-05,2026-09,125,40
+ppe_yoy_growth,2017-05,2026-09,113,52

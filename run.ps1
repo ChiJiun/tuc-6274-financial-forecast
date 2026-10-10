@@ -31,4 +31,6 @@ if ($AsOf) { $fetchArgs += @("--as-of", $AsOf) }
 & $venvPython src/pipeline.py --forecast-end $ForecastEnd
 & $venvPython src/validate_models.py
 & $venvPython src/build_scenarios.py
+& $venvPython src/build_quarterly_financials.py
+& $venvPython src/build_exogenous_phase2.py
 & $venvPython -m pytest -q

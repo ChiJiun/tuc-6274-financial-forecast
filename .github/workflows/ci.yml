@@ -24,4 +24,6 @@ jobs:
       - run: python src/build_scenarios.py
       - run: python src/build_exogenous_features.py
       - run: python src/benchmark_exogenous.py
+      - run: python src/build_quarterly_financials.py
+      - run: python src/build_exogenous_phase2.py
       - run: pytest -q

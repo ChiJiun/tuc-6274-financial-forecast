@@ -212,6 +212,21 @@ def infer_source_url(path: Path, ir_sources: dict[str, str] | None = None) -> st
                 f"&SSEASON={m.group(2)}&REPORT_ID=C"
             )
 
+    if rel.startswith("data/raw/exogenous/mops_sii_peer_rows/"):
+        m = re.search(r"peers_(\d{4})_(\d{2})\.html$", path.name)
+        if m:
+            roc_year = int(m.group(1)) - 1911
+            month = int(m.group(2))
+            return (
+                "https://mopsov.twse.com.tw/nas/t21/sii/"
+                f"t21sc03_{roc_year}_{month}_0.html"
+            )
+
+    if path.name == "cbc_ntd_usd_monthly_historical.html":
+        return "https://www.cbc.gov.tw/en/cp-480-58820-D92DC-2.html"
+    if path.name == "cbc_ntd_usd_monthly_current.html":
+        return "https://www.cbc.gov.tw/en/cp-480-58819-C8475-2.html"
+
     if path.name in CORE_SNAPSHOTS:
         return CORE_SNAPSHOTS[path.name]
 
@@ -245,7 +260,12 @@ def build_manifest_rows(
             p
             for p in RAW.rglob("*")
             if p.is_file()
-            and p.name not in {"manifest.csv", "README.md"}
+            and p.name not in {
+                "manifest.csv",
+                "README.md",
+                "peer_revenue_manifest.csv",
+                "source_inventory.csv",
+            }
             and not p.name.endswith(".part")
         ]
 
