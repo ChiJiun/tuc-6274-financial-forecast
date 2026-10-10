@@ -4,7 +4,10 @@ import argparse
 import json
 import math
 import re
+import sys
 from dataclasses import dataclass
+from html import unescape
+from importlib import metadata as importlib_metadata
 from datetime import datetime, timezone
 from io import StringIO
 from pathlib import Path
@@ -39,6 +42,19 @@ SELECTION_MODEL_NAMES = [
     "Ridge",
     "GradientBoosting",
     "RandomForest",
+]
+
+RUNTIME_PACKAGE_NAMES = [
+    "numpy",
+    "pandas",
+    "matplotlib",
+    "scikit-learn",
+    "statsmodels",
+    "openpyxl",
+    "requests",
+    "beautifulsoup4",
+    "lxml",
+    "pytest",
 ]
 
 
@@ -76,20 +92,126 @@ def _normalize_col(col) -> str:
     return str(col)
 
 
-def parse_mops_month(path: Path) -> dict | None:
-    m = re.search(r"t21sc03_(\d+)_(\d+)_0\.html$", path.name)
-    if not m:
-        return None
-    roc_year, month = int(m.group(1)), int(m.group(2))
-    year = roc_year + 1911
-    text = _decode_big5(path)
+class MopsMonthlyParseError(RuntimeError):
+    """Base exception for malformed MOPS monthly-revenue source files."""
+
+
+class MopsTickerNotFound(MopsMonthlyParseError):
+    """The HTML parsed, but the requested ticker is not present."""
+
+
+class MopsSchemaError(MopsMonthlyParseError):
+    """The ticker row exists but no valid monthly revenue can be extracted."""
+
+
+def _clean_mops_number(value) -> float:
+    if value is None or pd.isna(value):
+        return np.nan
+    text = re.sub(r"[^0-9.\-]", "", str(value))
+    if text in {"", "-", ".", "--"}:
+        return np.nan
+    try:
+        return float(text)
+    except ValueError:
+        return np.nan
+
+
+def _mops_file_period(path: Path) -> tuple[int, int]:
+    match = re.search(r"t21sc03_(\d+)_(\d+)_0\.html$", path.name)
+    if not match:
+        raise MopsSchemaError(f"Unexpected MOPS filename: {path}")
+    roc_year, month = int(match.group(1)), int(match.group(2))
+    if not 1 <= month <= 12:
+        raise MopsSchemaError(f"Invalid month in MOPS filename: {path}")
+    return roc_year + 1911, month
+
+
+def _monthly_record(
+    path: Path,
+    year: int,
+    month: int,
+    company_name: str,
+    revenue: float,
+) -> dict:
+    if not np.isfinite(revenue) or revenue <= 0:
+        raise MopsSchemaError(
+            f"{path}: invalid monthly revenue for {TICKER}: {revenue!r}"
+        )
+    return {
+        "date": pd.Timestamp(year=year, month=month, day=1),
+        "revenue_k_twd": int(round(revenue)),
+        "source_file": path.relative_to(ROOT).as_posix(),
+        "company_name": company_name.strip() or "台燿",
+        "source_kind": "MOPS OTC historical monthly revenue HTML",
+    }
+
+
+def _parse_mops_month_direct(path: Path, text: str, year: int, month: int) -> dict:
+    """Fast parser that scans only the ticker row instead of parsing every table."""
+    ticker_match = re.search(
+        rf"<td\b[^>]*>\s*{re.escape(TICKER)}\s*</td>",
+        text,
+        flags=re.IGNORECASE,
+    )
+    if ticker_match is None:
+        if TICKER not in text:
+            raise MopsTickerNotFound(f"{path}: ticker {TICKER} not found")
+        raise MopsSchemaError(
+            f"{path}: ticker {TICKER} appears in HTML but not in the expected <td> cell"
+        )
+
+    row_start = text.rfind("<tr", 0, ticker_match.start())
+    row_end = text.find("</tr>", ticker_match.end())
+    if row_start < 0 or row_end < 0:
+        raise MopsSchemaError(
+            f"{path}: ticker {TICKER} found but surrounding <tr> is incomplete"
+        )
+
+    row_html = text[row_start : row_end + len("</tr>")]
+    raw_cells = re.findall(
+        r"<td\b[^>]*>(.*?)</td>",
+        row_html,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+    cells = []
+    for raw_cell in raw_cells:
+        plain = re.sub(r"<[^>]+>", " ", raw_cell)
+        plain = unescape(plain)
+        cells.append(re.sub(r"\s+", " ", plain).strip())
 
     try:
-        tables = pd.read_html(StringIO(text))
-    except Exception:
-        return None
+        ticker_index = next(i for i, value in enumerate(cells) if value == TICKER)
+    except StopIteration as exc:
+        raise MopsSchemaError(
+            f"{path}: ticker cell found but row structure is inconsistent"
+        ) from exc
 
-    for table in tables:
+    if len(cells) <= ticker_index + 2:
+        raise MopsSchemaError(
+            f"{path}: ticker row has too few cells ({len(cells)}): {cells!r}"
+        )
+
+    company_name = cells[ticker_index + 1]
+    revenue = _clean_mops_number(cells[ticker_index + 2])
+    if not np.isfinite(revenue):
+        raise MopsSchemaError(
+            f"{path}: third ticker-row field is not numeric monthly revenue: "
+            f"{cells[ticker_index + 2]!r}"
+        )
+
+    return _monthly_record(path, year, month, company_name, revenue)
+
+
+def _parse_mops_month_pandas(path: Path, text: str, year: int, month: int) -> dict:
+    """Compatibility fallback for a future MOPS layout change."""
+    try:
+        tables = pd.read_html(StringIO(text))
+    except Exception as exc:
+        raise MopsSchemaError(f"{path}: pandas fallback could not parse HTML") from exc
+
+    ticker_seen = False
+    diagnostics: list[str] = []
+    for table_index, table in enumerate(tables):
         if table.empty:
             continue
         table = table.copy()
@@ -101,11 +223,11 @@ def parse_mops_month(path: Path) -> dict | None:
         if not mask.any():
             continue
 
+        ticker_seen = True
         row = table.loc[mask].iloc[0]
         cols = list(table.columns)
-
         name_col = next((c for c in cols if "公司名稱" in c), None)
-        rev_col = next(
+        revenue_col = next(
             (
                 c
                 for c in cols
@@ -117,50 +239,68 @@ def parse_mops_month(path: Path) -> dict | None:
             None,
         )
 
-        def clean_num(x):
-            if pd.isna(x):
-                return np.nan
-            s = re.sub(r"[^0-9.\-]", "", str(x))
-            return float(s) if s not in {"", "-", "."} else np.nan
-
-        if rev_col is not None:
-            revenue = clean_num(row[rev_col])
+        if revenue_col is not None:
+            revenue = _clean_mops_number(row[revenue_col])
             company_name = str(row[name_col]).strip() if name_col else "台燿"
-        else:
-            vals = [str(v).strip() for v in row.tolist()]
-            try:
-                idx = vals.index(TICKER)
-            except ValueError:
-                idx = next((i for i, v in enumerate(vals) if v == TICKER), -1)
-            if idx < 0:
-                continue
-            company_name = vals[idx + 1] if idx + 1 < len(vals) else "台燿"
-            revenue = np.nan
-            for v in vals[idx + 2 :]:
-                n = clean_num(v)
-                if not np.isnan(n) and abs(n) >= 10000:
-                    revenue = n
-                    break
+            if np.isfinite(revenue):
+                return _monthly_record(
+                    path, year, month, company_name, revenue
+                )
 
-        if np.isnan(revenue):
-            continue
+        values = [str(value).strip() for value in row.tolist()]
+        ticker_index = next(
+            (i for i, value in enumerate(values) if value == TICKER),
+            -1,
+        )
+        if ticker_index >= 0 and ticker_index + 2 < len(values):
+            revenue = _clean_mops_number(values[ticker_index + 2])
+            if np.isfinite(revenue):
+                company_name = values[ticker_index + 1]
+                return _monthly_record(
+                    path, year, month, company_name, revenue
+                )
+        diagnostics.append(
+            f"table={table_index}, columns={cols!r}, row={values!r}"
+        )
 
-        return {
-            "date": pd.Timestamp(year=year, month=month, day=1),
-            "revenue_k_twd": int(round(revenue)),
-            "source_file": path.relative_to(ROOT).as_posix(),
-            "company_name": company_name,
-            "source_kind": "MOPS OTC historical monthly revenue HTML",
-        }
-    return None
+    if not ticker_seen:
+        raise MopsTickerNotFound(
+            f"{path}: ticker {TICKER} not found by direct or pandas parser"
+        )
+    raise MopsSchemaError(
+        f"{path}: ticker {TICKER} found but monthly revenue schema was not "
+        f"recognized. Diagnostics: {'; '.join(diagnostics[:2])}"
+    )
+
+
+def parse_mops_month(path: Path) -> dict:
+    year, month = _mops_file_period(path)
+    text = _decode_big5(path)
+
+    try:
+        return _parse_mops_month_direct(path, text, year, month)
+    except MopsTickerNotFound:
+        raise
+    except MopsSchemaError as direct_error:
+        try:
+            return _parse_mops_month_pandas(path, text, year, month)
+        except MopsMonthlyParseError as fallback_error:
+            raise MopsSchemaError(
+                f"{path}: direct parser failed ({direct_error}); "
+                f"fallback failed ({fallback_error})"
+            ) from fallback_error
 
 
 def build_monthly_dataset() -> pd.DataFrame:
     records = []
-    for p in sorted(MOPS_MONTHLY.glob("t21sc03_*_*_0.html")):
-        rec = parse_mops_month(p)
-        if rec:
-            records.append(rec)
+    ticker_missing = []
+    for path in sorted(MOPS_MONTHLY.glob("t21sc03_*_*_0.html")):
+        try:
+            records.append(parse_mops_month(path))
+        except MopsTickerNotFound:
+            ticker_missing.append(path.name)
+        except MopsSchemaError:
+            raise
 
     if not records:
         raise RuntimeError("No MOPS monthly rows for 6274 could be parsed.")
@@ -712,6 +852,11 @@ def write_run_metadata(
 ):
     payload = {
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+        "python_version": ".".join(str(x) for x in sys.version_info[:3]),
+        "environment_lock": "requirements.lock.txt",
+        "package_versions": {
+            name: importlib_metadata.version(name) for name in RUNTIME_PACKAGE_NAMES
+        },
         "ticker": TICKER,
         "model_start": MODEL_START.strftime("%Y-%m"),
         "actual_data_through": model_df["date"].max().strftime("%Y-%m"),
