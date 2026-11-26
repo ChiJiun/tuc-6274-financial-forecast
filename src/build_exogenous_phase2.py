@@ -218,7 +218,9 @@ def build_fx_monthly() -> pd.DataFrame:
 
 def build_phase2_features() -> pd.DataFrame:
     monthly = pd.read_csv(MONTHLY_REVENUE, parse_dates=["date"])
-    monthly = monthly.loc[monthly["date"].ge("2013-01-01")].copy()
+    # Keep this historical exogenous experiment frozen at its documented cutoff.
+    # The production revenue-only forecast can use newer MOPS observations.
+    monthly = monthly.loc[monthly["date"].between("2013-01-01", "2026-09-01")].copy()
     monthly = monthly.sort_values("date").reset_index(drop=True)
     monthly["origin"] = monthly["date"]
     monthly["as_of"] = (
