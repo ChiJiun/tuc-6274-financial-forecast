@@ -56,7 +56,7 @@ def empirical_bootstrap_uncertainty(
     q_low, q_med, q_high = np.quantile(sampled, [alpha, 0.5, 1.0 - alpha])
 
     spec_by_year: dict[int, tuple[float, float]] = {}
-    for year in (2027, 2028):
+    for year in annual_forecast.loc[annual_forecast['year'].ge(2027), 'year']:
         col = f"{year}_revenue_bn_twd"
         if col in ets_sensitivity.columns:
             values = ets_sensitivity[col].dropna().astype(float)
@@ -98,7 +98,7 @@ def build_revenue_scenarios(annual_forecast: pd.DataFrame) -> pd.DataFrame:
 
     base_growth = {
         year: float(annual.loc[year, "yoy_growth_pct"])
-        for year in (2027, 2028)
+        for year in annual.index[annual.index >= 2027]
     }
     starting_revenue = float(annual.loc[2026, "selected_revenue_bn_twd"])
 
@@ -111,7 +111,7 @@ def build_revenue_scenarios(annual_forecast: pd.DataFrame) -> pd.DataFrame:
     rows = []
     for scenario, shock in shocks.items():
         prior = starting_revenue
-        for year in (2027, 2028):
+        for year in base_growth:
             growth = max(-99.0, base_growth[year] + shock)
             revenue = prior * (1.0 + growth / 100.0)
             rows.append(
@@ -152,7 +152,7 @@ def build_growth_margin_sensitivity(
     }
 
     rows = []
-    for year in (2027, 2028):
+    for year in annual.index[annual.index >= 2027]:
         prior_base = float(annual.loc[year - 1, "selected_revenue_bn_twd"])
         base_growth = float(annual.loc[year, "yoy_growth_pct"])
         for growth_case, growth_shock in growth_shocks.items():
@@ -208,7 +208,7 @@ def write_report(
         (
             "80% empirical calibration bands use the selected model's 12-month "
             "rolling-origin total forecast errors. They are not business scenarios "
-            "and do not include future regime-change risk."
+            "and do not include future regime-change risk. Beyond the calibrated 12-month horizon these bands are illustrative extrapolations, not validated prediction intervals."
         ),
         "",
     ]
@@ -260,7 +260,7 @@ def write_report(
         "",
     ]
 
-    for year in (2027, 2028):
+    for year in sorted(sensitivity['year'].unique()):
         subset = sensitivity.loc[sensitivity["year"].eq(year)].copy()
         pivot = subset.pivot(
             index="growth_case",

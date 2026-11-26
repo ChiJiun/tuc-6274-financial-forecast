@@ -6,7 +6,7 @@
 - 清洗後財務資料
 - 月營收特徵工程
 - Walk-forward backtest
-- 2026–2028 營收預測
+- 2026–2030 營收預測
 - 作業用歷史財務資料與比率
 
 ## 專案結構
@@ -87,11 +87,17 @@
 
 目前選擇 **Holt-Winters（damped trend + additive seasonality）**。
 
-| Year | Revenue Forecast (NT$ bn) | YoY |
-|---|---:|---:|
-| 2026E | 62.59 | 106.3% |
-| 2027F | 109.36 | 74.7% |
-| 2028F | 152.25 | 39.2% |
+| Year | 2026-09 Forecast (NT$ bn) | 2026-10 Forecast (NT$ bn) | October-version YoY |
+|---|---:|---:|---:|
+| 2026E | 62.59 | 62.79 | 106.94% |
+| 2027F | 109.36 | 111.23 | 77.14% |
+| 2028F | 152.25 | 155.86 | 40.12% |
+| 2029F | 192.63 | 197.88 | 26.96% |
+| 2030F | 230.66 | 237.45 | 20.00% |
+
+正式營收預測截止 2026-10；9 月版保留於 `snapshots/2026-09/`。兩版選模皆為 HW_Damped_Add（12-month WAPE 17.76%）。外生特徵 Phase 2 實驗仍使用原本 2026-09 截止日。
+
+2029–2030 為長期外推；尚未進行相應 horizon 的回測驗證。
 
 詳細結果：
 
@@ -115,7 +121,7 @@ Windows PowerShell：
 
 ```powershell
 ./run.ps1
-./run.ps1 -AsOf 2026-09 -ForecastEnd 2028-12  # 重現指定資料截止日
+./run.ps1 -AsOf 2026-10 -ForecastEnd 2030-12  # 使用本次營收資料
 ```
 
 或：
@@ -127,7 +133,7 @@ pip install -r requirements.lock.txt
 
 python src/fetch_raw.py
 python src/build_assignment_financials.py
-python src/pipeline.py --forecast-end 2028-12
+python src/pipeline.py --forecast-end 2030-12
 python src/validate_models.py
 python src/build_scenarios.py
 pytest -q

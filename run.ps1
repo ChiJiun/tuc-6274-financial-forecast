@@ -1,6 +1,6 @@
 param(
     [string]$AsOf = "",
-    [string]$ForecastEnd = "2028-12"
+    [string]$ForecastEnd = "2030-12"
 )
 
 $ErrorActionPreference = "Stop"

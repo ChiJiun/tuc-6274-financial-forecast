@@ -1,0 +1,5 @@
+﻿year,point_forecast_bn_twd,empirical_80_low_bn_twd,empirical_80_median_bn_twd,empirical_80_high_bn_twd,ets_spec_low_bn_twd,ets_spec_high_bn_twd,selected_model,calibration_folds,interval_level,method
+2027,109.361227484726,94.04090831989235,120.2826569003238,142.54363861887663,104.6501310252574,109.361227484726,HW_Damped_Add,20,0.8,bootstrap of multiplicative correction factors from 12-month rolling-origin total forecast errors
+2028,152.2494663680224,130.9209711501036,167.45395738137557,198.44503772519604,144.4066746556449,177.19549343026884,HW_Damped_Add,20,0.8,bootstrap of multiplicative correction factors from 12-month rolling-origin total forecast errors
+2029,192.6340102489263,165.6480794314657,211.87152974614506,251.08307006212937,181.84234286210437,279.78359964428483,HW_Damped_Add,20,0.8,bootstrap of multiplicative correction factors from 12-month rolling-origin total forecast errors
+2030,230.66101781401971,198.34791660738128,253.6961289125816,300.6482418216821,217.09262183738585,430.16563223157874,HW_Damped_Add,20,0.8,bootstrap of multiplicative correction factors from 12-month rolling-origin total forecast errors

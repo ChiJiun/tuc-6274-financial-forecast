@@ -13,7 +13,9 @@ import pipeline  # noqa: E402
 
 def ets_sensitivity(model_df: pd.DataFrame) -> pd.DataFrame:
     history = model_df["revenue_bn_twd"].to_numpy(dtype=float)
-    horizon = 27
+    forecast = pd.read_csv(pipeline.RESULTS / 'monthly_forecast.csv', parse_dates=['date'])
+    dates = pd.DatetimeIndex(forecast['date'])
+    horizon = len(dates)
     specs = [
         "HW_Damped_Mul",
         "HW_Damped_Add",
@@ -26,9 +28,7 @@ def ets_sensitivity(model_df: pd.DataFrame) -> pd.DataFrame:
         rows.append(
             {
                 "model": name,
-                "2026Q4_revenue_bn_twd": pred[:3].sum(),
-                "2027_revenue_bn_twd": pred[3:15].sum(),
-                "2028_revenue_bn_twd": pred[15:27].sum(),
+                **{f'{year}_remaining_revenue_bn_twd' if (dates.year == year).sum() < 12 else f'{year}_revenue_bn_twd': pred[dates.year == year].sum() for year in sorted(set(dates.year))},
             }
         )
     return pd.DataFrame(rows)

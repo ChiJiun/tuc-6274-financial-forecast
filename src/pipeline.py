@@ -31,7 +31,7 @@ FIGURES = REPORTS / "figures"
 
 TICKER = "6274"
 MODEL_START = pd.Timestamp("2013-01-01")
-DEFAULT_FORECAST_END = pd.Timestamp("2028-12-01")
+DEFAULT_FORECAST_END = pd.Timestamp("2030-12-01")
 SELECTION_HORIZON_MONTHS = 12
 SELECTION_ORIGIN_START = pd.Timestamp("2020-12-01")
 SELECTION_MODEL_NAMES = [
@@ -888,7 +888,7 @@ def main():
         "--forecast-end",
         type=parse_forecast_end,
         default=DEFAULT_FORECAST_END,
-        help="Last forecast month in YYYY-MM format (default: 2028-12).",
+        help="Last forecast month in YYYY-MM format (default: 2030-12).",
     )
     args = parser.parse_args()
 
