@@ -82,7 +82,8 @@ def test_real_financial_source_and_proxy_policy():
     model_data = features.loc[features["origin"].ge("2013-01-01")]
     assert len(model_data) >= 165
     assert model_data["origin"].is_unique
-    assert model_data["origin"].max() == pd.Timestamp("2026-09-01")
+    monthly = pd.read_csv(ROOT / "data" / "processed" / "monthly_revenue.csv", parse_dates=["date"])
+    assert model_data["origin"].max() == monthly["date"].max()
     assert (model_data["financial_availability_policy"].dropna()
             == "next_year_july_1_proxy_not_actual_release").all()
     dec2025 = features.loc[features["origin"].eq("2025-12-01")].iloc[0]

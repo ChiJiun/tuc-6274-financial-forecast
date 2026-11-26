@@ -1,6 +1,6 @@
 # 台燿科技（6274）Revenue Forecast Methodology
 
-- Model window: 2013-01 to 2026-09
+- Model window: 2013-01 to 2026-10
 - Selected model: **HW_Damped_Add**
 - Mean out-of-sample WAPE: **17.76%**
 
@@ -14,9 +14,16 @@ Partial-year 2026 performance is retained only in the annual-origin stress test.
 
 | Year | Revenue (NT$ bn) | YoY |
 |---:|---:|---:|
-| 2026 | 62.59 | 106.3% |
-| 2027 | 109.36 | 74.7% |
-| 2028 | 152.25 | 39.2% |
+| 2026 | 62.79 | 106.9% |
+| 2027 | 111.23 | 77.1% |
+| 2028 | 155.86 | 40.1% |
+| 2029 | 197.88 | 27.0% |
+| 2030 | 237.45 | 20.0% |
+
+## Interpretation
+
+This model is a quantitative anchor for the Sales Growth assumption.
+It does not replace capacity, product-mix, ASP, raw-material, FX, or industry analysis.
 
 ## Raw-data rule
 

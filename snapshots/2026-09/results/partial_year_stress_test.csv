@@ -1,0 +1,3 @@
+﻿test_year,model,forecast_months,mape_pct,wape_pct,total_error_pct,actual_total_bn_twd,forecast_total_bn_twd,is_complete_12m,selection_eligible
+2026,HW_Damped_Add,9,24.038997897165647,26.397910249043687,-24.41171163077215,42.30381399999999,31.976728917501774,False,False
+2026,SeasonalNaive,9,47.67483140166131,49.849781866003866,-49.849781866003845,42.30381399999999,21.215455,False,False

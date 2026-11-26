@@ -25,6 +25,9 @@ def test_parse_latest_mops_month_exact_value():
     assert rec is not None
     assert rec["date"] == pd.Timestamp("2026-09-01")
     assert rec["revenue_k_twd"] == 6_125_570
+    october = pipeline.parse_mops_month(p.with_name("t21sc03_115_10_0.html"))
+    assert october["date"] == pd.Timestamp("2026-10-01")
+    assert october["revenue_k_twd"] == 6_478_444
 
 
 def test_monthly_dataset_integrity():
@@ -68,11 +71,13 @@ def test_model_outputs_are_within_reference_tolerance():
     assert abs(float(selected.iloc[0]["mean_WAPE_pct"]) - 17.76) < 0.5
     assert int(selected.iloc[0]["folds"]) >= 15
 
-    expected = {
-        2026: 62.59,
-        2027: 109.36,
-        2028: 152.25,
+    metadata = json.loads((ROOT / "results" / "run_metadata.json").read_text(encoding="utf-8"))
+    references = {
+        "2026-09": {2026: 62.59, 2027: 109.36, 2028: 152.25, 2029: 192.63, 2030: 230.66},
+        "2026-10": {2026: 62.79, 2027: 111.23, 2028: 155.86, 2029: 197.88, 2030: 237.45},
     }
+    expected = references[metadata["actual_data_through"]]
+    expected = {year: value for year, value in expected.items() if year <= int(metadata["forecast_end"][:4])}
     actual = annual.set_index("year")["selected_revenue_bn_twd"].to_dict()
     for year, reference in expected.items():
         assert year in actual
@@ -183,7 +188,11 @@ def test_uncertainty_and_business_scenarios_are_separate_and_consistent():
     )
     annual = pd.read_csv(ROOT / "results" / "annual_forecast.csv")
 
-    assert uncertainty["year"].tolist() == [2027, 2028]
+    years = annual.loc[annual['year'].ge(2027), 'year'].tolist()
+    assert uncertainty['year'].tolist() == years
+    metadata = json.loads((ROOT / "results" / "run_metadata.json").read_text(encoding="utf-8"))
+    assert years[-1] == int(metadata["forecast_end"][:4])
+    assert uncertainty[['ets_spec_low_bn_twd', 'ets_spec_high_bn_twd']].notna().all().all()
     assert (uncertainty["empirical_80_low_bn_twd"] < uncertainty["point_forecast_bn_twd"]).all()
     assert (uncertainty["point_forecast_bn_twd"] < uncertainty["empirical_80_high_bn_twd"]).all()
     assert (uncertainty["calibration_folds"] >= 15).all()
@@ -192,10 +201,12 @@ def test_uncertainty_and_business_scenarios_are_separate_and_consistent():
     assert set(scenarios["scenario"]) == {"Downside", "Base", "Upside"}
     base = scenarios.loc[scenarios["scenario"].eq("Base")].set_index("year")
     annual = annual.set_index("year")
-    for year in (2027, 2028):
+    for year in years:
         assert abs(base.loc[year, "revenue_bn_twd"] - annual.loc[year, "selected_revenue_bn_twd"]) < 1e-6
 
-    assert len(sensitivity) == 18
+    assert len(sensitivity) == 9 * len(years)
+    assert set(sensitivity['year']) == set(years)
+    assert len(scenarios) == 3 * len(years)
     expected_gp = sensitivity["revenue_bn_twd"] * sensitivity["gross_margin_pct"] / 100
     assert np.allclose(sensitivity["gross_profit_bn_twd"], expected_gp)
 
